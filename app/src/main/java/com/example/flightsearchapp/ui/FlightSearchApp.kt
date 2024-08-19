@@ -8,18 +8,17 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.flightsearchapp.R
+import com.example.flightsearchapp.ui.items.FlightSearchTopAppBar
 import com.example.flightsearchapp.ui.screens.HomeScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FlightSearchApp(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        topBar = { CenterAlignedTopAppBar(title = { R.string.app_name }) },
+        topBar = { FlightSearchTopAppBar() },
         content = { contentPadding ->
-            Surface(
-            ) {
+            Surface {
                 HomeScreen(
                     modifier = modifier.padding(contentPadding)
                 )
