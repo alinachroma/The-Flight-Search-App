@@ -29,3 +29,9 @@ class SearchViewModel : ViewModel() {
     }
 }
 
+private val allAirports = listOf(
+    Airport(id = 9565, iataCode = "VIE", name = "Vienna International Airport", passengers = 2006),
+    Airport(id = 3886, iataCode = "MUC", name = "Munich International Airport", passengers = 3729),
+    Airport(id = 5816, iataCode = "DUS", name = "Duesseldorf International Airport", passengers = 55),
+    Airport(id = 5199, iataCode = "KEF", name = "Keflavik International Airport", passengers = 3927)
+)
