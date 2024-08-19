@@ -25,7 +25,11 @@ fun FlightSearchApp(
         content = { contentPadding ->
             Surface {
                 HomeScreen(
-                    modifier = modifier.padding(contentPadding)
+                    modifier = modifier.padding(contentPadding),
+                    searchText = searchText,
+                    airports = persons,
+                    isSearching = isSearching,
+                    onSearchTextChange = viewModel::onSearchTextChange
                 )
             }
         }
