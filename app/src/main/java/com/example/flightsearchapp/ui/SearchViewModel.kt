@@ -22,7 +22,27 @@ class SearchViewModel : ViewModel() {
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
+    private val _airports = MutableStateFlow(allAirports)
 
+    @OptIn(FlowPreview::class)
+    val airports = searchText
+        .debounce(500L)
+        .onEach { _isSearching.update { true } }
+        .combine(_airports) { text, persons ->
+            if (text.isBlank()) {
+                persons
+            } else {
+                delay(2000L)
+                persons.filter {
+                    it.doesMatchSearchQuery(text)
+                }
+            }
+        }.onEach { _isSearching.update { false } }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = _airports.value
+        )
 
     fun onSearchTextChange(text: String) {
         _searchText.value = text
