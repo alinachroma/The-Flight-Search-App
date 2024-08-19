@@ -1,13 +1,13 @@
 package com.example.flightsearchapp.ui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.flightsearchapp.R
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearchapp.ui.items.FlightSearchTopAppBar
 import com.example.flightsearchapp.ui.screens.HomeScreen
 
@@ -15,6 +15,11 @@ import com.example.flightsearchapp.ui.screens.HomeScreen
 fun FlightSearchApp(
     modifier: Modifier = Modifier
 ) {
+    val viewModel = viewModel<SearchViewModel>()
+    val searchText by viewModel.searchText.collectAsState()
+    val persons by viewModel.airports.collectAsState()
+    val isSearching by viewModel.isSearching.collectAsState()
+
     Scaffold(
         topBar = { FlightSearchTopAppBar() },
         content = { contentPadding ->
