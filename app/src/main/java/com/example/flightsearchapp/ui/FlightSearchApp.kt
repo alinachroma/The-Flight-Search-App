@@ -21,6 +21,9 @@ fun FlightSearchApp(
         content = { contentPadding ->
             Surface(
             ) {
+                HomeScreen(
+                    modifier = modifier.padding(contentPadding)
+                )
             }
         }
     )
