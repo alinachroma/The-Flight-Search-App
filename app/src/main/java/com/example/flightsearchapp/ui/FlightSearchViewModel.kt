@@ -29,7 +29,7 @@ class FlightSearchViewModel(
     fun onSearchTextChange(text: String) {
         _searchText.value = text
         viewModelScope.launch {
-            airportRepository.getAirportByQuery(query = text)
+            airportRepository.getAirportsByQuery(query = text)
                 .collect { airports -> _airports.value = airports }
         }
     }
