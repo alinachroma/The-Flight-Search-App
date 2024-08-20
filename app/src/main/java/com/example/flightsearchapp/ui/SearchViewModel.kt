@@ -2,7 +2,7 @@ package com.example.flightsearchapp.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.flightsearchapp.data.Airport
+import com.example.flightsearchapp.model.Airport
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
