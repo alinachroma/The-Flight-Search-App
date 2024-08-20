@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "favorite")
 data class Favorite(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "departure_code")
-    val departureCode: Int,
+    val departureCode: String,
     @ColumnInfo(name = "destination_code")
-    val destinationCode: Int
+    val destinationCode: String
 )
