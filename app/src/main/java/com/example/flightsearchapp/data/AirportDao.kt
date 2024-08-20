@@ -10,4 +10,7 @@ interface AirportDao {
 
     @Query("SELECT * FROM airport")
     fun getAllAirports(): Flow<List<Airport>>
+
+    @Query("SELECT * FROM airport WHERE name LIKE '%' || :query || '%' OR iata_code LIKE '%' || :query || '%'")
+    fun getAirportQuery(query: String): Flow<List<Airport>>
 }
