@@ -15,9 +15,9 @@ import com.example.flightsearchapp.ui.screens.HomeScreen
 fun FlightSearchApp(
     modifier: Modifier = Modifier
 ) {
-    val viewModel = viewModel<FlightSearchViewModel>()
+    val viewModel: FlightSearchViewModel = viewModel(factory = FlightSearchViewModel.Factory)
     val searchText by viewModel.searchText.collectAsState()
-    val persons by viewModel.airports.collectAsState()
+    val airportsResult by viewModel.airports.collectAsState()
     val isSearching by viewModel.isSearching.collectAsState()
 
     Scaffold(
@@ -27,7 +27,7 @@ fun FlightSearchApp(
                 HomeScreen(
                     modifier = modifier.padding(contentPadding),
                     searchText = searchText,
-                    airports = persons,
+                    airports = airportsResult,
                     isSearching = isSearching,
                     onSearchTextChange = viewModel::onSearchTextChange
                 )

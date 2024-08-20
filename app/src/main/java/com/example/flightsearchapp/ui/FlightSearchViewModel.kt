@@ -45,6 +45,17 @@ class FlightSearchViewModel(
     fun onSearchTextChange(text: String) {
         _searchText.value = text
     }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[APPLICATION_KEY] as FlightSearchApplication)
+                val airportRepository = application.airportRepository
+                    FlightSearchViewModel(airportRepository = airportRepository)
+            }
+        }
+    }
 }
+
 
 
