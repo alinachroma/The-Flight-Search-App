@@ -9,16 +9,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapp.FlightSearchApplication
 import com.example.flightsearchapp.data.AirportRepository
 import com.example.flightsearchapp.model.Airport
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class FlightSearchViewModel(
@@ -34,16 +26,12 @@ class FlightSearchViewModel(
     private val _airports = MutableStateFlow<List<Airport>>(emptyList())
     val airports = _airports.asStateFlow()
 
-    private fun getAirports() {
-        viewModelScope.launch {
-            airportRepository.getAirportsStream().collect { airports ->
-                _airports.value = airports
-            }
-        }
-    }
-
     fun onSearchTextChange(text: String) {
         _searchText.value = text
+        viewModelScope.launch {
+            airportRepository.getAirportByQuery(query = text)
+                .collect { airports -> _airports.value = airports }
+        }
     }
 
     companion object {
@@ -51,7 +39,7 @@ class FlightSearchViewModel(
             initializer {
                 val application = (this[APPLICATION_KEY] as FlightSearchApplication)
                 val airportRepository = application.airportRepository
-                    FlightSearchViewModel(airportRepository = airportRepository)
+                FlightSearchViewModel(airportRepository = airportRepository)
             }
         }
     }
