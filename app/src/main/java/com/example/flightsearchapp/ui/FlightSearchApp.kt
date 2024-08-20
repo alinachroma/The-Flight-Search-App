@@ -15,7 +15,7 @@ import com.example.flightsearchapp.ui.screens.HomeScreen
 fun FlightSearchApp(
     modifier: Modifier = Modifier
 ) {
-    val viewModel = viewModel<SearchViewModel>()
+    val viewModel = viewModel<FlightSearchViewModel>()
     val searchText by viewModel.searchText.collectAsState()
     val persons by viewModel.airports.collectAsState()
     val isSearching by viewModel.isSearching.collectAsState()
