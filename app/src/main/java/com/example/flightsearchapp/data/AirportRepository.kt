@@ -7,7 +7,7 @@ interface AirportRepository {
     fun getAirportsStream(): Flow<List<Airport>>
 }
 
-class OfflineAirportRepository(private val airportDao: AirportDao): AirportRepository {
+class FlightSearchAirportRepository(private val airportDao: AirportDao): AirportRepository {
     override fun getAirportsStream(): Flow<List<Airport>> =
         airportDao.getAllAirports()
 }
