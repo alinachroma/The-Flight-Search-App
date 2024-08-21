@@ -11,14 +11,4 @@ data class Airport(
     val iataCode: String,
     val name: String,
     val passengers: Int
-) {
-    fun doesMatchSearchQuery(query: String): Boolean {
-        val matchingCombinations = listOf(
-            "$iataCode",
-            "$name",
-        )
-        return matchingCombinations.any {
-            it.contains(query, ignoreCase = true)
-        }
-    }
-}
+) 
