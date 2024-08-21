@@ -14,8 +14,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
+import com.example.flightsearchapp.ui.items.AirportInfoItem
+import com.example.flightsearchapp.ui.items.DestinationItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
@@ -27,6 +31,9 @@ fun HomeScreen(
     airports: List<Airport>,
     isSearching: Boolean,
     onSearchTextChange: (String) -> Unit,
+    onAirportSelected: (Airport) -> Unit,
+    isAirportSelected: Boolean,
+    selectedAirport: Airport?
 ) {
     Column(
         modifier = modifier
@@ -36,7 +43,7 @@ fun HomeScreen(
             value = searchText,
             onValueChange = onSearchTextChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(text = "Search") }
+            placeholder = { Text(text = stringResource(R.string.search)) }
         )
         Spacer(modifier = Modifier.height(16.dp))
         if (isSearching) {
@@ -44,16 +51,35 @@ fun HomeScreen(
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
         }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            items(airports) { airport ->
-                Text(
-                    text = "${airport.iataCode} ${airport.name}",
-                    modifier = Modifier.fillMaxWidth()
-                )
+        if (isAirportSelected) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                items(airports) { airport ->
+                    selectedAirport?.let {
+                        DestinationItem(
+                            departureName = it.name,
+                            arrivalName = "testArrivalName",
+                            iataCodeDeparture = selectedAirport.iataCode,
+                            iataCodeArrival = "testDepName"
+                        )
+                    }
+                }
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                items(airports) { airport ->
+                    AirportInfoItem(
+                        airport = airport,
+                        onAirportSelected = onAirportSelected
+                    )
+                }
             }
         }
     }
@@ -66,8 +92,11 @@ fun HomeScreenPreview() {
         HomeScreen(
             searchText = "M",
             airports = fakeAirportsData,
-            isSearching = false
-        ) {
-        }
+            isSearching = false,
+            onSearchTextChange = { },
+            isAirportSelected = false,
+            onAirportSelected = { },
+            selectedAirport = fakeAirportsData.first()
+        )
     }
 }
