@@ -16,6 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.model.Airport
+import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
+import com.example.flightsearchapp.utils.ThemePreviews
+import com.example.flightsearchapp.utils.fakeAirportsData
 
 @Composable
 fun HomeScreen(
@@ -52,6 +55,19 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+fun HomeScreenPreview() {
+    FlightSearchAppTheme {
+        HomeScreen(
+            searchText = "M",
+            airports = fakeAirportsData,
+            isSearching = false
+        ) {
         }
     }
 }

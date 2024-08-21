@@ -1,5 +1,6 @@
 package com.example.flightsearchapp.ui.items
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -10,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.example.flightsearchapp.R
+import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,5 +33,7 @@ fun FlightSearchTopAppBar(modifier: Modifier = Modifier) {
 @ThemePreviews
 @Composable
 fun FlightSearchTopAppBarPreview() {
-    FlightSearchTopAppBar()
+    FlightSearchAppTheme {
+        FlightSearchTopAppBar()
+    }
 }
