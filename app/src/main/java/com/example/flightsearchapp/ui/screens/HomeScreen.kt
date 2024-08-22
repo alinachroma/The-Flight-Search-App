@@ -56,7 +56,8 @@ fun HomeScreen(
         if (isAirportSelected) {
             RoutesForSelectedAirportItem(
                 arrivalsForSelectedAirport = arrivalsForSelectedAirport,
-                selectedAirport = selectedAirport ?: emptyAirportData)
+                selectedAirport = selectedAirport ?: emptyAirportData
+            )
         } else {
             LazyColumn(
                 modifier = Modifier

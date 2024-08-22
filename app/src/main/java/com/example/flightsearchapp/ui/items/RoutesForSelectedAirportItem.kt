@@ -1,6 +1,5 @@
 package com.example.flightsearchapp.ui.items
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -14,13 +13,12 @@ import com.example.flightsearchapp.utils.fakeAirportsData
 fun RoutesForSelectedAirportItem(
     arrivalsForSelectedAirport: List<Airport>,
     selectedAirport: Airport,
-    modifier: Modifier = Modifier) {
-    LazyColumn(
-        modifier = modifier.fillMaxWidth()
-    ) {
+    modifier: Modifier = Modifier
+) {
+    LazyColumn {
         items(arrivalsForSelectedAirport) { arrival ->
             RouteItem(
-                modifier = Modifier,
+                modifier = modifier,
                 selectedAirport = selectedAirport,
                 arrival = arrival
             )
