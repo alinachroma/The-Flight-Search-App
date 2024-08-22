@@ -1,6 +1,5 @@
 package com.example.flightsearchapp.ui.items
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,16 +28,20 @@ fun RouteItem(
         Row(modifier = Modifier.padding(8.dp)) {
             Column {
                 Text(text = stringResource(id = R.string.depart))
-                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(text = selectedAirport.iataCode)
-                    Text(text = selectedAirport.name)
-                }
+                AirportInfoItem(
+                    modifier = Modifier,
+                    airport = selectedAirport
+                )
                 Text(text = stringResource(id = R.string.arrive))
-                Row {
-                    Text(text = arrival.iataCode)
-                    Text(text = arrival.name)
-                }
+                AirportInfoItem(
+                    modifier = Modifier,
+                    airport = arrival
+                )
             }
+            FavoriteIcon(
+                modifier = Modifier,
+                isFavorite = true
+            )
         }
     }
 }
@@ -49,6 +52,7 @@ fun RouteItemPreview() {
     FlightSearchAppTheme {
         RouteItem(
             selectedAirport = fakeAirportsData.first(),
-            arrival = fakeAirportsData.last())
+            arrival = fakeAirportsData.last()
+        )
     }
 }

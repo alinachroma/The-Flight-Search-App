@@ -1,7 +1,9 @@
 package com.example.flightsearchapp.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,7 +41,7 @@ fun HomeScreen(
 ) {
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         TextField(
             value = searchText,
@@ -49,7 +51,9 @@ fun HomeScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
         if (isSearching) {
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
         }
@@ -60,15 +64,17 @@ fun HomeScreen(
             )
         } else {
             LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 items(airports) { airport ->
-                    AirportInfoItem(
-                        airport = airport,
-                        onAirportSelected = onAirportSelected
-                    )
+                    Row(modifier = Modifier
+                        .clickable { onAirportSelected(airport) }
+                    ) {
+                        AirportInfoItem(
+                            modifier = Modifier,
+                            airport = airport
+                        )
+                    }
                 }
             }
         }
