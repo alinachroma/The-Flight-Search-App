@@ -83,6 +83,7 @@ dependencies {
     // Room & database
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.datastore.core.android)
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
