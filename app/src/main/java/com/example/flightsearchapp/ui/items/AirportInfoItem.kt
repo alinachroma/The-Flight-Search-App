@@ -25,12 +25,8 @@ fun AirportInfoItem(
         .fillMaxWidth()
         .clickable { onAirportSelected(airport) }
     ) {
-        Text(
-            text = airport.iataCode,
-        )
-        Text(
-            text = airport.name,
-        )
+        Text(text = airport.iataCode,)
+        Text(text = airport.name,)
     }
 }
 
