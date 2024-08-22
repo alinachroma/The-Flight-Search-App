@@ -17,25 +17,25 @@ import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
 
 @Composable
-fun DestinationItem(
-    arrivalAirport: Airport,
-    departureAirport: Airport,
-    modifier: Modifier = Modifier
+fun RouteItem(
+    modifier: Modifier = Modifier,
+    selectedAirport: Airport,
+    arrival: Airport
 ) {
     Card(
         modifier = modifier,
     ) {
-        Row(modifier = Modifier.padding(8.dp)) {
+        Row(modifier = modifier.padding(8.dp)) {
             Column {
                 Text(text = stringResource(id = R.string.depart))
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(text = departureAirport.iataCode)
-                    Text(text = departureAirport.name)
+                    Text(text = selectedAirport.iataCode)
+                    Text(text = selectedAirport.name)
                 }
                 Text(text = stringResource(id = R.string.arrive))
                 Row {
-                    Text(text = arrivalAirport.iataCode)
-                    Text(text = arrivalAirport.name)
+                    Text(text = arrival.iataCode)
+                    Text(text = arrival.name)
                 }
             }
         }
@@ -44,12 +44,10 @@ fun DestinationItem(
 
 @ThemePreviews
 @Composable
-fun DestinationItemPreview() {
+fun RouteItemPreview() {
     FlightSearchAppTheme {
-        DestinationItem(
-            arrivalAirport = fakeAirportsData.first(),
-            departureAirport = fakeAirportsData.last(),
-            modifier = Modifier
-        )
+        RouteItem(
+            selectedAirport = fakeAirportsData.first(),
+            arrival = fakeAirportsData.last())
     }
 }
