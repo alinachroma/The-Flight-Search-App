@@ -5,9 +5,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface AirportRepository {
     fun getAirportsByQuery(query: String): Flow<List<Airport>>
+    fun getArrivalsForSelectedAirport(iataCode: String, name: String): Flow<List<Airport>>
 }
 
 class FlightSearchAirportRepository(private val airportDao: AirportDao): AirportRepository {
     override fun getAirportsByQuery(query: String): Flow<List<Airport>> =
-        airportDao.getAirportsByQuery(query)
+        airportDao.getAirportByQuery(query)
+
+    override fun getArrivalsForSelectedAirport(iataCode: String, name: String): Flow<List<Airport>> =
+        airportDao.getArrivalsForSelectedAirport(iataCode, name)
 }
