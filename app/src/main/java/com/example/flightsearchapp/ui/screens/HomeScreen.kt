@@ -12,6 +12,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,6 +22,7 @@ import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.ui.items.AirportInfoItem
 import com.example.flightsearchapp.ui.items.DestinationItem
+import com.example.flightsearchapp.ui.items.DestinationItemPreview
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
@@ -33,6 +36,7 @@ fun HomeScreen(
     onSearchTextChange: (String) -> Unit,
     onAirportSelected: (Airport) -> Unit,
     isAirportSelected: Boolean,
+    arrivalsForSelectedAirport: List<Airport>,
     selectedAirport: Airport?
 ) {
     Column(
@@ -57,13 +61,11 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .weight(1f)
             ) {
-                items(airports) { airport ->
-                    selectedAirport?.let {
+                items(arrivalsForSelectedAirport) { arrivalAirport ->
+                    if (selectedAirport != null) {
                         DestinationItem(
-                            departureName = it.name,
-                            arrivalName = "testArrivalName",
-                            iataCodeDeparture = selectedAirport.iataCode,
-                            iataCodeArrival = "testDepName"
+                            arrivalAirport = arrivalAirport,
+                            departureAirport = selectedAirport
                         )
                     }
                 }
@@ -96,7 +98,8 @@ fun HomeScreenPreview() {
             onSearchTextChange = { },
             isAirportSelected = false,
             onAirportSelected = { },
-            selectedAirport = fakeAirportsData.first()
+            selectedAirport = fakeAirportsData.first(),
+            arrivalsForSelectedAirport = fakeAirportsData
         )
     }
 }
