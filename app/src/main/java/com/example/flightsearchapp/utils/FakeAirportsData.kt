@@ -2,6 +2,13 @@ package com.example.flightsearchapp.utils
 
 import com.example.flightsearchapp.model.Airport
 
+val emptyAirportData = Airport(
+    id = 2359,
+    iataCode = "",
+    name = "",
+    passengers = 7094
+)
+
 val fakeAirportsData = listOf(
     Airport(
         id = 9615,
