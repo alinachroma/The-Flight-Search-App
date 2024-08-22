@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapp.FlightSearchApplication
 import com.example.flightsearchapp.data.AirportRepository
 import com.example.flightsearchapp.model.Airport
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -44,10 +45,13 @@ class FlightSearchViewModel(
         _flightSearchUiState.update {
             uiState -> uiState.copy(
                 isAirportSelected = true,
-                selectedAirport = airport
+                selectedAirport = airport,
             )
         }
     }
+
+    fun getArrivalsForSelectedAirport(airport: Airport): Flow<List<Airport>> =
+        airportRepository.getArrivalsForSelectedAirport(airport.iataCode, airport.name)
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
