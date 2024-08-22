@@ -12,8 +12,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.ui.items.AirportInfoItem
-import com.example.flightsearchapp.ui.items.DestinationItem
-import com.example.flightsearchapp.ui.items.DestinationItemPreview
+import com.example.flightsearchapp.ui.items.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
+import com.example.flightsearchapp.utils.emptyAirportData
 import com.example.flightsearchapp.utils.fakeAirportsData
 
 @Composable
@@ -56,20 +54,9 @@ fun HomeScreen(
             }
         }
         if (isAirportSelected) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) {
-                items(arrivalsForSelectedAirport) { arrivalAirport ->
-                    if (selectedAirport != null) {
-                        DestinationItem(
-                            arrivalAirport = arrivalAirport,
-                            departureAirport = selectedAirport
-                        )
-                    }
-                }
-            }
+            RoutesForSelectedAirportItem(
+                arrivalsForSelectedAirport = arrivalsForSelectedAirport,
+                selectedAirport = selectedAirport ?: emptyAirportData)
         } else {
             LazyColumn(
                 modifier = Modifier
