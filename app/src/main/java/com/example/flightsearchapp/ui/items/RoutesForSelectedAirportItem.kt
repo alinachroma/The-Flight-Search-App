@@ -1,9 +1,11 @@
 package com.example.flightsearchapp.ui.items
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
@@ -15,7 +17,9 @@ fun RoutesForSelectedAirportItem(
     selectedAirport: Airport,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         items(arrivalsForSelectedAirport) { arrival ->
             RouteItem(
                 modifier = modifier,
