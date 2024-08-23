@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
+import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.items.AirportInfoItem
 import com.example.flightsearchapp.ui.items.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
@@ -37,6 +38,8 @@ fun HomeScreen(
     onAirportSelected: (Airport) -> Unit,
     isAirportSelected: Boolean,
     arrivalsForSelectedAirport: List<Airport>,
+    hasFavorite: Boolean,
+    onFavoriteClicked: (FavoriteRoute) -> Unit,
     selectedAirport: Airport?
 ) {
     Column(
@@ -60,7 +63,9 @@ fun HomeScreen(
         if (isAirportSelected) {
             RoutesForSelectedAirportItem(
                 arrivalsForSelectedAirport = arrivalsForSelectedAirport,
-                selectedAirport = selectedAirport ?: emptyAirportData
+                selectedAirport = selectedAirport ?: emptyAirportData,
+                hasFavorite = hasFavorite,
+                onFavoriteClicked = onFavoriteClicked
             )
         } else {
             LazyColumn(
@@ -93,7 +98,9 @@ fun HomeScreenPreview() {
             isAirportSelected = false,
             onAirportSelected = { },
             selectedAirport = fakeAirportsData.first(),
-            arrivalsForSelectedAirport = fakeAirportsData
+            arrivalsForSelectedAirport = fakeAirportsData,
+            hasFavorite = true,
+            onFavoriteClicked = {}
         )
     }
 }

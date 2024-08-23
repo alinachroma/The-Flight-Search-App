@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.model.Airport
+import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
@@ -15,6 +16,8 @@ import com.example.flightsearchapp.utils.fakeAirportsData
 fun RoutesForSelectedAirportItem(
     arrivalsForSelectedAirport: List<Airport>,
     selectedAirport: Airport,
+    hasFavorite: Boolean,
+    onFavoriteClicked: (FavoriteRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -24,7 +27,10 @@ fun RoutesForSelectedAirportItem(
             RouteItem(
                 modifier = modifier,
                 selectedAirport = selectedAirport,
-                arrival = arrival
+                arrival = arrival,
+                hasFavorite = hasFavorite,
+                onFavoriteClicked = onFavoriteClicked
+
             )
         }
     }
@@ -37,6 +43,8 @@ fun RoutesForSelectedAirportItemPreview() {
         RoutesForSelectedAirportItem(
             arrivalsForSelectedAirport = fakeAirportsData,
             selectedAirport = fakeAirportsData.first(),
+            hasFavorite = true,
+            onFavoriteClicked = {},
             modifier = Modifier
         )
     }
