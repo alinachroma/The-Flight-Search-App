@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapp.FlightSearchApplication
 import com.example.flightsearchapp.data.AirportRepository
+import com.example.flightsearchapp.data.FavoriteRouteRepository
 import com.example.flightsearchapp.model.Airport
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class FlightSearchViewModel(
-    private val airportRepository: AirportRepository
+    private val airportRepository: AirportRepository,
+    private val favoriteRouteRepository: FavoriteRouteRepository
 ) : ViewModel() {
 
     private val _flightSearchUiState = MutableStateFlow(FlightSearchUiState())
@@ -58,7 +60,11 @@ class FlightSearchViewModel(
             initializer {
                 val application = (this[APPLICATION_KEY] as FlightSearchApplication)
                 val airportRepository = application.airportRepository
-                FlightSearchViewModel(airportRepository = airportRepository)
+                val favoriteRouteRepository = application.favoriteRouteRepository
+                FlightSearchViewModel(
+                    airportRepository = airportRepository,
+                    favoriteRouteRepository = favoriteRouteRepository
+                )
             }
         }
     }
