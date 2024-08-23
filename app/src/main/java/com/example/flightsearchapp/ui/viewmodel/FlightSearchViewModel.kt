@@ -10,6 +10,7 @@ import com.example.flightsearchapp.FlightSearchApplication
 import com.example.flightsearchapp.data.AirportRepository
 import com.example.flightsearchapp.data.FavoriteRouteRepository
 import com.example.flightsearchapp.model.Airport
+import com.example.flightsearchapp.model.FavoriteRoute
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,8 +45,8 @@ class FlightSearchViewModel(
     }
 
     fun onAirportClick(airport: Airport) {
-        _flightSearchUiState.update {
-            uiState -> uiState.copy(
+        _flightSearchUiState.update { uiState ->
+            uiState.copy(
                 isAirportSelected = true,
                 selectedAirport = airport,
             )
@@ -54,6 +55,16 @@ class FlightSearchViewModel(
 
     fun getArrivalsForSelectedAirport(airport: Airport): Flow<List<Airport>> =
         airportRepository.getArrivalsForSelectedAirport(airport.iataCode, airport.name)
+
+    fun markRouteAsFavorite(route: FavoriteRoute) =
+        viewModelScope.launch {
+            favoriteRouteRepository.insert(route)
+        }
+
+    fun getFavoriteRoutes() =
+        viewModelScope.launch {
+            favoriteRouteRepository.getFavoriteRoutes()
+        }
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
