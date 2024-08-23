@@ -1,6 +1,7 @@
 package com.example.flightsearchapp.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,4 +16,7 @@ interface FavoriteRouteDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFavoriteRoute(favoriteRoute: FavoriteRoute)
+
+    @Delete
+    suspend fun deleteFavoriteRoute(favoriteRoute: FavoriteRoute)
 }
