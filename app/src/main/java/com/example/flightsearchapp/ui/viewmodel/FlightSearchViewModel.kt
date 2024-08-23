@@ -53,12 +53,15 @@ class FlightSearchViewModel(
         }
     }
 
-    fun getArrivalsForSelectedAirport(airport: Airport): Flow<List<Airport>> =
-        airportRepository.getArrivalsForSelectedAirport(airport.iataCode, airport.name)
+    fun getArrivalsForSelectedAirport(selectedAirport: Airport): Flow<List<Airport>> =
+        airportRepository.getArrivalsForSelectedAirport(
+            iataCode = selectedAirport.iataCode,
+            name = selectedAirport.name
+        )
 
-    fun markRouteAsFavorite(route: FavoriteRoute) =
+    fun markRouteAsFavorite(favoriteRoute: FavoriteRoute) =
         viewModelScope.launch {
-            favoriteRouteRepository.insert(route)
+            favoriteRouteRepository.insertFavoriteRoute(favoriteRoute)
         }
 
     fun getFavoriteRoutes() =

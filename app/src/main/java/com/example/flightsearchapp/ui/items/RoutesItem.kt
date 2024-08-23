@@ -2,7 +2,6 @@ package com.example.flightsearchapp.ui.items
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,8 +23,8 @@ fun RouteItem(
     modifier: Modifier = Modifier,
     selectedAirport: Airport,
     hasFavorite: Boolean,
-    onFavoriteClicked: (FavoriteRoute) -> Unit,
-    arrival: Airport
+    onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
+    destinationAirport: Airport
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -43,17 +42,17 @@ fun RouteItem(
                 Text(text = stringResource(id = R.string.arrive))
                 AirportInfoItem(
                     modifier = Modifier,
-                    airport = arrival
+                    airport = destinationAirport
                 )
             }
             FavoriteIcon(
                 modifier = Modifier,
                 hasFavorite = hasFavorite,
-                onFavoriteClicked = {
-                    onFavoriteClicked(
+                onFavoriteRouteClicked = {
+                    onFavoriteRouteClicked(
                         FavoriteRoute(
-                            departureCode = selectedAirport.iataCode,
-                            destinationCode = arrival.iataCode
+                            departureIata = selectedAirport.iataCode,
+                            destinationIata = destinationAirport.iataCode
                         )
                     )
                 }
@@ -68,9 +67,9 @@ fun RouteItemPreview() {
     FlightSearchAppTheme {
         RouteItem(
             selectedAirport = fakeAirportsData.first(),
-            arrival = fakeAirportsData.last(),
+            destinationAirport = fakeAirportsData.last(),
             hasFavorite = true,
-            onFavoriteClicked = {}
+            onFavoriteRouteClicked = {}
         )
     }
 }

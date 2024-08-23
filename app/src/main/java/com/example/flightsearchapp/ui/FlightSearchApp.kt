@@ -20,7 +20,7 @@ fun FlightSearchApp(
     val viewModel: FlightSearchViewModel = viewModel(factory = FlightSearchViewModel.Factory)
     val flightSearchUiState = viewModel.flightSearchUiState.collectAsState()
     val arrivalsForSelectedAirport by viewModel.getArrivalsForSelectedAirport(
-        airport = flightSearchUiState.value.selectedAirport ?: emptyAirportData
+        selectedAirport = flightSearchUiState.value.selectedAirport ?: emptyAirportData
     ).collectAsState(emptyList())
 
     Scaffold(
@@ -38,7 +38,7 @@ fun FlightSearchApp(
                     selectedAirport = flightSearchUiState.value.selectedAirport,
                     arrivalsForSelectedAirport = arrivalsForSelectedAirport,
                     hasFavorite = false,
-                    onFavoriteClicked = viewModel::markRouteAsFavorite
+                    onFavoriteRouteClicked = viewModel::markRouteAsFavorite
                 )
             }
         }

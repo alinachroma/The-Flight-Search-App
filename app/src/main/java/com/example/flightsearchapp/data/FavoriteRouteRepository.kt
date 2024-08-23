@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRouteRepository {
     fun getFavoriteRoutes(): Flow<List<FavoriteRoute>>
-    suspend fun insert(favoriteRoute: FavoriteRoute)
-    suspend fun delete(favoriteRoute: FavoriteRoute)
+    suspend fun insertFavoriteRoute(favoriteRoute: FavoriteRoute)
+    suspend fun deleteFavoriteRoute(favoriteRoute: FavoriteRoute)
 }
 
 class OfflineFavoriteRouteRepository(private val favoriteRouteDao: FavoriteRouteDao) : FavoriteRouteRepository {
@@ -15,11 +15,11 @@ class OfflineFavoriteRouteRepository(private val favoriteRouteDao: FavoriteRoute
         favoriteRouteDao.getFavoriteRoutes()
 
 
-    override suspend fun insert(favoriteRoute: FavoriteRoute) =
+    override suspend fun insertFavoriteRoute(favoriteRoute: FavoriteRoute) =
         favoriteRouteDao.insertFavoriteRoute(favoriteRoute)
 
 
-    override suspend fun delete(favoriteRoute: FavoriteRoute) =
+    override suspend fun deleteFavoriteRoute(favoriteRoute: FavoriteRoute) =
         favoriteRouteDao.deleteFavoriteRoute(favoriteRoute)
 
 

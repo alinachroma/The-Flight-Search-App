@@ -17,21 +17,21 @@ import com.example.flightsearchapp.utils.ThemePreviews
 @Composable
 fun FavoriteIcon(
     hasFavorite: Boolean,
-    onFavoriteClicked: (Boolean) -> Unit,
+    onFavoriteRouteClicked: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isFavorite by rememberSaveable { mutableStateOf(hasFavorite) }
+    var isFavoriteRoute by rememberSaveable { mutableStateOf(hasFavorite) }
 
     IconToggleButton(
-        checked = isFavorite,
+        checked = isFavoriteRoute,
         onCheckedChange = {
-            isFavorite = !isFavorite
-            onFavoriteClicked(isFavorite)
+            isFavoriteRoute = !isFavoriteRoute
+            onFavoriteRouteClicked(isFavoriteRoute)
         },
         modifier = modifier
     ) {
         Icon(
-            tint = if (isFavorite) Color.Red else Color.LightGray,
+            tint = if (isFavoriteRoute) Color.Red else Color.LightGray,
             imageVector = Icons.Filled.Star,
             contentDescription = null
         )
@@ -44,7 +44,7 @@ fun FavoriteIconPreview() {
     FlightSearchAppTheme {
         FavoriteIcon(
             hasFavorite = true,
-            onFavoriteClicked = {}
+            onFavoriteRouteClicked = {}
         )
     }
 }

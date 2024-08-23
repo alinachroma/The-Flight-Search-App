@@ -10,8 +10,8 @@ data class FavoriteRoute(
     val id: Int = 0,
 
     @ColumnInfo(name = "departure_code")
-    val departureCode: String,
+    val departureIata: String,
 
     @ColumnInfo(name = "destination_code")
-    val destinationCode: String
+    val destinationIata: String
 )
