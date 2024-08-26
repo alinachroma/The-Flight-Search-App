@@ -22,7 +22,6 @@ import com.example.flightsearchapp.utils.fakeAirportsData
 fun RouteItem(
     modifier: Modifier = Modifier,
     selectedAirport: Airport,
-    hasFavorite: Boolean,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     destinationAirport: Airport
 ) {
@@ -47,15 +46,13 @@ fun RouteItem(
             }
             FavoriteIcon(
                 modifier = Modifier,
-                hasFavorite = hasFavorite,
                 onFavoriteRouteClicked = {
                     onFavoriteRouteClicked(
                         FavoriteRoute(
                             departureIata = selectedAirport.iataCode,
                             destinationIata = destinationAirport.iataCode
                         )
-                    )
-                }
+                    )                }
             )
         }
     }
@@ -68,8 +65,6 @@ fun RouteItemPreview() {
         RouteItem(
             selectedAirport = fakeAirportsData.first(),
             destinationAirport = fakeAirportsData.last(),
-            hasFavorite = true,
             onFavoriteRouteClicked = {}
         )
     }
-}

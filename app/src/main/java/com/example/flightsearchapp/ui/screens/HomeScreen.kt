@@ -38,15 +38,13 @@ fun HomeScreen(
     onAirportSelected: (Airport) -> Unit,
     isAirportSelected: Boolean,
     arrivalsForSelectedAirport: List<Airport>,
-    hasFavorite: Boolean,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     selectedAirport: Airport?
 ) {
     Column(
         modifier = modifier
             .fillMaxSize(),
-    ) {
-        TextField(
+    ) {        TextField(
             value = searchText,
             onValueChange = onSearchTextChange,
             modifier = Modifier.fillMaxWidth(),
@@ -64,15 +62,13 @@ fun HomeScreen(
             RoutesForSelectedAirportItem(
                 arrivalsForSelectedAirport = arrivalsForSelectedAirport,
                 selectedAirport = selectedAirport ?: emptyAirportData,
-                hasFavorite = hasFavorite,
                 onFavoriteRouteClicked = onFavoriteRouteClicked
             )
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(airports) { airport ->
-                    Row(modifier = Modifier
+                items(airports) { airport ->                    Row(modifier = Modifier
                         .clickable { onAirportSelected(airport) }
                     ) {
                         AirportInfoItem(
@@ -99,7 +95,6 @@ fun HomeScreenPreview() {
             onAirportSelected = { },
             selectedAirport = fakeAirportsData.first(),
             arrivalsForSelectedAirport = fakeAirportsData,
-            hasFavorite = true,
             onFavoriteRouteClicked = {}
         )
     }

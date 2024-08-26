@@ -16,7 +16,6 @@ import com.example.flightsearchapp.utils.fakeAirportsData
 fun RoutesForSelectedAirportItem(
     arrivalsForSelectedAirport: List<Airport>,
     selectedAirport: Airport,
-    hasFavorite: Boolean,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -28,7 +27,6 @@ fun RoutesForSelectedAirportItem(
                 modifier = modifier,
                 selectedAirport = selectedAirport,
                 destinationAirport = destinationAirport,
-                hasFavorite = hasFavorite,
                 onFavoriteRouteClicked = onFavoriteRouteClicked
             )
         }
@@ -42,7 +40,6 @@ fun RoutesForSelectedAirportItemPreview() {
         RoutesForSelectedAirportItem(
             arrivalsForSelectedAirport = fakeAirportsData,
             selectedAirport = fakeAirportsData.first(),
-            hasFavorite = true,
             onFavoriteRouteClicked = {},
             modifier = Modifier
         )

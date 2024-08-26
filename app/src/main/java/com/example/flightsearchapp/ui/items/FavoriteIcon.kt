@@ -16,11 +16,9 @@ import com.example.flightsearchapp.utils.ThemePreviews
 
 @Composable
 fun FavoriteIcon(
-    hasFavorite: Boolean,
     onFavoriteRouteClicked: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isFavoriteRoute by rememberSaveable { mutableStateOf(hasFavorite) }
 
     IconToggleButton(
         checked = isFavoriteRoute,
