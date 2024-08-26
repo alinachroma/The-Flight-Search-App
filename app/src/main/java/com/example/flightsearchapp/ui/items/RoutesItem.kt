@@ -50,9 +50,10 @@ fun RouteItem(
                     onFavoriteRouteClicked(
                         FavoriteRoute(
                             departureIata = selectedAirport.iataCode,
-                            destinationIata = destinationAirport.iataCode
-                        )
-                    )                }
+                            destinationIata = destinationAirport.iataCode,
+                        ),
+                    )
+                }
             )
         }
     }
@@ -68,3 +69,4 @@ fun RouteItemPreview() {
             onFavoriteRouteClicked = {}
         )
     }
+}

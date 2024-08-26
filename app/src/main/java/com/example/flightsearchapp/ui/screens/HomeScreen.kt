@@ -44,7 +44,8 @@ fun HomeScreen(
     Column(
         modifier = modifier
             .fillMaxSize(),
-    ) {        TextField(
+    ) {
+        TextField(
             value = searchText,
             onValueChange = onSearchTextChange,
             modifier = Modifier.fillMaxWidth(),
@@ -68,7 +69,8 @@ fun HomeScreen(
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(airports) { airport ->                    Row(modifier = Modifier
+                items(airports) { airport ->
+                    Row(modifier = Modifier
                         .clickable { onAirportSelected(airport) }
                     ) {
                         AirportInfoItem(
@@ -95,7 +97,8 @@ fun HomeScreenPreview() {
             onAirportSelected = { },
             selectedAirport = fakeAirportsData.first(),
             arrivalsForSelectedAirport = fakeAirportsData,
-            onFavoriteRouteClicked = {}
+            onFavoriteRouteClicked = {
+            }
         )
     }
 }
