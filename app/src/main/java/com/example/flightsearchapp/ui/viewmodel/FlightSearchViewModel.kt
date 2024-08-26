@@ -14,6 +14,7 @@ import com.example.flightsearchapp.model.FavoriteRoute
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -42,6 +43,7 @@ class FlightSearchViewModel(
                     }
                 }
         }
+        println(flightSearchUiState.value)
     }
 
     fun onAirportClick(airport: Airport) {
@@ -51,6 +53,7 @@ class FlightSearchViewModel(
                 selectedAirport = airport,
             )
         }
+        println(flightSearchUiState.value)
     }
 
     fun getArrivalsForSelectedAirport(selectedAirport: Airport): Flow<List<Airport>> =
@@ -59,14 +62,32 @@ class FlightSearchViewModel(
             name = selectedAirport.name
         )
 
-    fun markRouteAsFavorite(favoriteRoute: FavoriteRoute) =
-        viewModelScope.launch {
-            favoriteRouteRepository.insertFavoriteRoute(favoriteRoute)
-        }
+    private fun validateFavorite(favoriteRoute: FavoriteRoute): Boolean =
+        _flightSearchUiState.value.favoriteRoutes
+            .any {
+                it.departureIata == favoriteRoute.departureIata
+                        && it.destinationIata == favoriteRoute.destinationIata
+            }
 
-    fun getFavoriteRoutes() =
+
+    fun markOrUnmarkAsFavorite(favoriteRoute: FavoriteRoute) =
         viewModelScope.launch {
-            favoriteRouteRepository.getFavoriteRoutes()
+            val isFavorite = validateFavorite(favoriteRoute)
+            if (isFavorite) {
+                favoriteRouteRepository.deleteFavoriteRoute(favoriteRoute.departureIata, favoriteRoute.destinationIata)
+                _flightSearchUiState.update { uiState ->
+                    uiState.copy(
+                        favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
+                    )
+                }
+            } else {
+                favoriteRouteRepository.insertFavoriteRoute(favoriteRoute)
+                _flightSearchUiState.update { uiState ->
+                    uiState.copy(
+                        favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
+                    )
+                }
+            }
         }
 
     companion object {
