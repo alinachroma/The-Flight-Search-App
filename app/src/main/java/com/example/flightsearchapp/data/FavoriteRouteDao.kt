@@ -17,6 +17,6 @@ interface FavoriteRouteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFavoriteRoute(favoriteRoute: FavoriteRoute)
 
-    @Delete
-    suspend fun deleteFavoriteRoute(favoriteRoute: FavoriteRoute)
+    @Query("DELETE FROM favorite WHERE departure_code = :departureIata AND destination_code = :destinationIata")
+    suspend fun deleteFavoriteRoute(departureIata: String, destinationIata: String)
 }
