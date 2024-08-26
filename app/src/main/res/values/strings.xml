@@ -3,4 +3,5 @@
     <string name="depart">Depart</string>
     <string name="arrive">Arrive</string>
     <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
 </resources>
