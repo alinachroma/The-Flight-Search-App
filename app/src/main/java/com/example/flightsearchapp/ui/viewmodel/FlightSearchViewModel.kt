@@ -62,13 +62,12 @@ class FlightSearchViewModel(
             name = selectedAirport.name
         )
 
-    private fun validateFavorite(favoriteRoute: FavoriteRoute): Boolean =
+    fun validateFavorite(favoriteRoute: FavoriteRoute): Boolean =
         _flightSearchUiState.value.favoriteRoutes
             .any {
                 it.departureIata == favoriteRoute.departureIata
                         && it.destinationIata == favoriteRoute.destinationIata
             }
-
 
     fun markOrUnmarkAsFavorite(favoriteRoute: FavoriteRoute) =
         viewModelScope.launch {
@@ -80,11 +79,21 @@ class FlightSearchViewModel(
                         favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
                     )
                 }
+                _flightSearchUiState.update { uiState ->
+                    uiState.copy(
+                        isFavoriteButtonFilled = false
+                    )
+                }
             } else {
                 favoriteRouteRepository.insertFavoriteRoute(favoriteRoute)
                 _flightSearchUiState.update { uiState ->
                     uiState.copy(
                         favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
+                    )
+                }
+                _flightSearchUiState.update { uiState ->
+                    uiState.copy(
+                        isFavoriteButtonFilled = true
                     )
                 }
             }
