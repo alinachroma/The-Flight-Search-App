@@ -17,6 +17,7 @@ fun RoutesForSelectedAirportItem(
     arrivalsForSelectedAirport: List<Airport>,
     selectedAirport: Airport,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
+    isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -27,7 +28,8 @@ fun RoutesForSelectedAirportItem(
                 modifier = modifier,
                 selectedAirport = selectedAirport,
                 destinationAirport = destinationAirport,
-                onFavoriteRouteClicked = onFavoriteRouteClicked
+                onFavoriteRouteClicked = onFavoriteRouteClicked,
+                isFavoriteButtonFilled = isFavoriteButtonFilled
             )
         }
     }
@@ -41,6 +43,7 @@ fun RoutesForSelectedAirportItemPreview() {
             arrivalsForSelectedAirport = fakeAirportsData,
             selectedAirport = fakeAirportsData.first(),
             onFavoriteRouteClicked = {},
+            isFavoriteButtonFilled = { true },
             modifier = Modifier
         )
     }

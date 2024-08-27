@@ -23,6 +23,7 @@ fun RouteItem(
     modifier: Modifier = Modifier,
     selectedAirport: Airport,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
+    isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
     destinationAirport: Airport
 ) {
     Card(
@@ -45,19 +46,17 @@ fun RouteItem(
                 )
             }
             FavoriteIcon(
-                modifier = Modifier,
-                onFavoriteRouteClicked = {
-                    onFavoriteRouteClicked(
-                        FavoriteRoute(
-                            departureIata = selectedAirport.iataCode,
-                            destinationIata = destinationAirport.iataCode,
-                        ),
-                    )
-                }
+                onFavoriteRouteClicked = onFavoriteRouteClicked,
+                isFavoriteButtonFilled = isFavoriteButtonFilled,
+                route = FavoriteRoute(
+                    departureIata = selectedAirport.iataCode,
+                    destinationIata = destinationAirport.iataCode,
+                )
             )
         }
     }
 }
+
 
 @ThemePreviews
 @Composable
@@ -66,7 +65,8 @@ fun RouteItemPreview() {
         RouteItem(
             selectedAirport = fakeAirportsData.first(),
             destinationAirport = fakeAirportsData.last(),
-            onFavoriteRouteClicked = {}
+            onFavoriteRouteClicked = {},
+            isFavoriteButtonFilled = { true }
         )
     }
 }

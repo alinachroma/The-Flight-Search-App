@@ -39,6 +39,7 @@ fun HomeScreen(
     isAirportSelected: Boolean,
     arrivalsForSelectedAirport: List<Airport>,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
+    isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
     selectedAirport: Airport?
 ) {
     Column(
@@ -63,7 +64,8 @@ fun HomeScreen(
             RoutesForSelectedAirportItem(
                 arrivalsForSelectedAirport = arrivalsForSelectedAirport,
                 selectedAirport = selectedAirport ?: emptyAirportData,
-                onFavoriteRouteClicked = onFavoriteRouteClicked
+                onFavoriteRouteClicked = onFavoriteRouteClicked,
+                isFavoriteButtonFilled = isFavoriteButtonFilled
             )
         } else {
             LazyColumn(
@@ -97,8 +99,8 @@ fun HomeScreenPreview() {
             onAirportSelected = { },
             selectedAirport = fakeAirportsData.first(),
             arrivalsForSelectedAirport = fakeAirportsData,
-            onFavoriteRouteClicked = {
-            }
+            onFavoriteRouteClicked = {},
+            isFavoriteButtonFilled = { true }
         )
     }
 }

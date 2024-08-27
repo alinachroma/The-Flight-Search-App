@@ -37,7 +37,8 @@ fun FlightSearchApp(
                     onAirportSelected = viewModel::onAirportClick,
                     selectedAirport = flightSearchUiState.value.selectedAirport,
                     arrivalsForSelectedAirport = arrivalsForSelectedAirport,
-                    onFavoriteRouteClicked = viewModel::markOrUnmarkAsFavorite
+                    onFavoriteRouteClicked = viewModel::markOrUnmarkAsFavorite,
+                    isFavoriteButtonFilled = viewModel::validateFavorite
                 )
             }
         }
