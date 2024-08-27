@@ -43,7 +43,6 @@ class FlightSearchViewModel(
                     }
                 }
         }
-        println(flightSearchUiState.value)
     }
 
     fun onAirportClick(airport: Airport) {
@@ -53,7 +52,6 @@ class FlightSearchViewModel(
                 selectedAirport = airport,
             )
         }
-        println(flightSearchUiState.value)
     }
 
     fun getArrivalsForSelectedAirport(selectedAirport: Airport): Flow<List<Airport>> =
@@ -73,29 +71,34 @@ class FlightSearchViewModel(
         viewModelScope.launch {
             val isFavorite = validateFavorite(favoriteRoute)
             if (isFavorite) {
-                favoriteRouteRepository.deleteFavoriteRoute(favoriteRoute.departureIata, favoriteRoute.destinationIata)
-                _flightSearchUiState.update { uiState ->
-                    uiState.copy(
-                        favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
-                    )
-                }
-                _flightSearchUiState.update { uiState ->
-                    uiState.copy(
-                        isFavoriteButtonFilled = false
-                    )
-                }
+                favoriteRouteRepository.deleteFavoriteRoute(
+                    favoriteRoute.departureIata,
+                    favoriteRoute.destinationIata
+                )
+                updateFavoriteButtonState(newFavButtonState = false)
+                updateFavoriteRoutes()
             } else {
                 favoriteRouteRepository.insertFavoriteRoute(favoriteRoute)
-                _flightSearchUiState.update { uiState ->
-                    uiState.copy(
-                        favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
-                    )
-                }
-                _flightSearchUiState.update { uiState ->
-                    uiState.copy(
-                        isFavoriteButtonFilled = true
-                    )
-                }
+                updateFavoriteButtonState(newFavButtonState = true)
+                updateFavoriteRoutes()
+            }
+        }
+
+    private fun updateFavoriteButtonState(newFavButtonState: Boolean) =
+        viewModelScope.launch {
+            _flightSearchUiState.update { uiState ->
+                uiState.copy(
+                    isFavoriteButtonFilled = newFavButtonState
+                )
+            }
+        }
+
+    private fun updateFavoriteRoutes() =
+        viewModelScope.launch {
+            _flightSearchUiState.update { uiState ->
+                uiState.copy(
+                    favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
+                )
             }
         }
 
