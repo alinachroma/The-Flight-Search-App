@@ -9,8 +9,10 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapp.FlightSearchApplication
 import com.example.flightsearchapp.data.AirportRepository
 import com.example.flightsearchapp.data.FavoriteRouteRepository
+import com.example.flightsearchapp.data.UserPreferencesRepository
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.model.FavoriteRoute
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,11 +22,18 @@ import kotlinx.coroutines.launch
 
 class FlightSearchViewModel(
     private val airportRepository: AirportRepository,
-    private val favoriteRouteRepository: FavoriteRouteRepository
+    private val favoriteRouteRepository: FavoriteRouteRepository,
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
     private val _flightSearchUiState = MutableStateFlow(FlightSearchUiState())
     val flightSearchUiState = _flightSearchUiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            onSearchTextChange(userPreferencesRepository.searchString.first())
+        }
+    }
 
     fun onSearchTextChange(text: String) {
         _flightSearchUiState.update { uiState ->
@@ -34,7 +43,15 @@ class FlightSearchViewModel(
             )
         }
         viewModelScope.launch {
-            airportRepository.getAirportsByQuery(query = text)
+            userPreferencesRepository.saveLayoutPreference(text)
+            delay(500)
+            getAirportsBySearchString(text)
+        }
+    }
+
+    fun getAirportsBySearchString(searchString: String) =
+        viewModelScope.launch {
+            airportRepository.getAirportsByQuery(query = searchString)
                 .collect { airports ->
                     _flightSearchUiState.update { uiState ->
                         uiState.copy(
@@ -43,7 +60,6 @@ class FlightSearchViewModel(
                     }
                 }
         }
-    }
 
     fun onAirportClick(airport: Airport) {
         _flightSearchUiState.update { uiState ->
@@ -108,9 +124,11 @@ class FlightSearchViewModel(
                 val application = (this[APPLICATION_KEY] as FlightSearchApplication)
                 val airportRepository = application.airportRepository
                 val favoriteRouteRepository = application.favoriteRouteRepository
+                val userPreferencesRepository = application.userPreferencesRepository
                 FlightSearchViewModel(
                     airportRepository = airportRepository,
-                    favoriteRouteRepository = favoriteRouteRepository
+                    favoriteRouteRepository = favoriteRouteRepository,
+                    userPreferencesRepository = userPreferencesRepository
                 )
             }
         }
