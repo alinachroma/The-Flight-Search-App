@@ -43,7 +43,7 @@ class FlightSearchViewModel(
             )
         }
         viewModelScope.launch {
-            userPreferencesRepository.saveLayoutPreference(text)
+            userPreferencesRepository.saveSearchStringPreference(text)
             delay(500)
             getAirportsBySearchString(text)
         }

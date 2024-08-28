@@ -20,7 +20,7 @@ class UserPreferencesRepository(
         const val TAG = "UserPreferencesRepo"
     }
 
-    suspend fun saveLayoutPreference(searchString: String) {
+    suspend fun saveSearchStringPreference(searchString: String) {
         dataStore.edit {
             mutablePreferences -> mutablePreferences[SEARCH_STRING] = searchString
         }
