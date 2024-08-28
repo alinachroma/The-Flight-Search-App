@@ -83,7 +83,8 @@ dependencies {
     // Room & database
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.datastore)
+    implementation(libs.androidx.datastore.preferences.core.jvm)
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
