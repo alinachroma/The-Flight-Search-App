@@ -10,5 +10,4 @@ data class FlightSearchUiState(
     val isAirportSelected: Boolean = false,
     val selectedAirport: Airport? = null,
     var favoriteRoutes: List<FavoriteRoute> = emptyList(),
-    var isFavoriteButtonFilled: Boolean = false
 )
