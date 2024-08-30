@@ -32,6 +32,7 @@ class FlightSearchViewModel(
     init {
         viewModelScope.launch {
             onSearchTextChange(userPreferencesRepository.searchString.first())
+            updateFavoriteRoutes()
         }
     }
 
@@ -76,37 +77,27 @@ class FlightSearchViewModel(
             name = selectedAirport.name
         )
 
-    fun validateFavorite(favoriteRoute: FavoriteRoute): Boolean =
+    fun validateFavorite(route: FavoriteRoute): Boolean =
         _flightSearchUiState.value.favoriteRoutes
-            .any {
-                it.departureIata == favoriteRoute.departureIata
-                        && it.destinationIata == favoriteRoute.destinationIata
+            .any { favoriteRoute ->
+                favoriteRoute.departureIata == route.departureIata
+                        && favoriteRoute.destinationIata == route.destinationIata
             }
 
-    fun markOrUnmarkAsFavorite(favoriteRoute: FavoriteRoute) =
+
+    fun markOrUnmarkAsFavorite(route: FavoriteRoute) =
         viewModelScope.launch {
-            val isFavorite = validateFavorite(favoriteRoute)
+            val isFavorite = validateFavorite(route)
             if (isFavorite) {
                 favoriteRouteRepository.deleteFavoriteRoute(
-                    favoriteRoute.departureIata,
-                    favoriteRoute.destinationIata
+                    route.departureIata,
+                    route.destinationIata
                 )
-                updateFavoriteButtonState(newFavButtonState = false)
-                updateFavoriteRoutes()
             } else {
-                favoriteRouteRepository.insertFavoriteRoute(favoriteRoute)
-                updateFavoriteButtonState(newFavButtonState = true)
-                updateFavoriteRoutes()
-            }
-        }
+                favoriteRouteRepository.insertFavoriteRoute(route)
 
-    private fun updateFavoriteButtonState(newFavButtonState: Boolean) =
-        viewModelScope.launch {
-            _flightSearchUiState.update { uiState ->
-                uiState.copy(
-                    isFavoriteButtonFilled = newFavButtonState
-                )
             }
+            updateFavoriteRoutes()
         }
 
     private fun updateFavoriteRoutes() =
