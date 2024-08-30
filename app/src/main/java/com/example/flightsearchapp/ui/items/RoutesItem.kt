@@ -21,10 +21,12 @@ import com.example.flightsearchapp.utils.fakeAirportsData
 @Composable
 fun RouteItem(
     modifier: Modifier = Modifier,
-    selectedAirport: Airport,
+    departureName: String,
+    destinationName: String,
+    departureIata: String,
+    destinationIata: String,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
-    destinationAirport: Airport
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -37,20 +39,23 @@ fun RouteItem(
                 Text(text = stringResource(id = R.string.depart))
                 AirportInfoItem(
                     modifier = Modifier,
-                    airport = selectedAirport
+                    iataCode = departureIata,
+                    name = departureName
+
                 )
                 Text(text = stringResource(id = R.string.arrive))
                 AirportInfoItem(
                     modifier = Modifier,
-                    airport = destinationAirport
+                    iataCode = destinationIata,
+                    name = destinationName
                 )
             }
             FavoriteIcon(
                 onFavoriteRouteClicked = onFavoriteRouteClicked,
                 isFavoriteButtonFilled = isFavoriteButtonFilled,
                 route = FavoriteRoute(
-                    departureIata = selectedAirport.iataCode,
-                    destinationIata = destinationAirport.iataCode,
+                    departureIata = departureIata,
+                    destinationIata = destinationIata,
                 )
             )
         }
@@ -63,8 +68,10 @@ fun RouteItem(
 fun RouteItemPreview() {
     FlightSearchAppTheme {
         RouteItem(
-            selectedAirport = fakeAirportsData.first(),
-            destinationAirport = fakeAirportsData.last(),
+            departureIata = fakeAirportsData.first().iataCode,
+            destinationIata = fakeAirportsData.last().iataCode,
+            departureName = fakeAirportsData.first().name,
+            destinationName = fakeAirportsData.last().name,
             onFavoriteRouteClicked = {},
             isFavoriteButtonFilled = { true }
         )

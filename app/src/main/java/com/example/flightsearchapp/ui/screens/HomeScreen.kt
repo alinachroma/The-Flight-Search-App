@@ -1,6 +1,7 @@
 package com.example.flightsearchapp.ui.screens
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.items.AirportInfoItem
+import com.example.flightsearchapp.ui.items.RouteItem
 import com.example.flightsearchapp.ui.items.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
@@ -33,6 +35,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     searchText: String,
     airports: List<Airport>,
+    favorites: List<FavoriteRoute>,
     isSearching: Boolean,
     onSearchTextChange: (String) -> Unit,
     onAirportSelected: (Airport) -> Unit,
@@ -77,7 +80,8 @@ fun HomeScreen(
                     ) {
                         AirportInfoItem(
                             modifier = Modifier,
-                            airport = airport
+                            iataCode = airport.iataCode,
+                            name = airport.name
                         )
                     }
                 }
@@ -100,7 +104,8 @@ fun HomeScreenPreview() {
             selectedAirport = fakeAirportsData.first(),
             arrivalsForSelectedAirport = fakeAirportsData,
             onFavoriteRouteClicked = {},
-            isFavoriteButtonFilled = { true }
+            isFavoriteButtonFilled = { true },
+            favorites = emptyList()
         )
     }
 }
