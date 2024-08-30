@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.model.FavoriteRoute
-import com.example.flightsearchapp.ui.items.AirportInfoItem
-import com.example.flightsearchapp.ui.items.RouteItem
-import com.example.flightsearchapp.ui.items.RoutesForSelectedAirportItem
+import com.example.flightsearchapp.ui.components.AirportInfoItem
+import com.example.flightsearchapp.ui.components.RouteItem
+import com.example.flightsearchapp.ui.components.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.emptyAirportData

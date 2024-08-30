@@ -1,4 +1,4 @@
-package com.example.flightsearchapp.ui.items
+package com.example.flightsearchapp.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn

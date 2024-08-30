@@ -8,7 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.flightsearchapp.ui.items.FlightSearchTopAppBar
+import com.example.flightsearchapp.ui.components.FlightSearchTopAppBar
 import com.example.flightsearchapp.ui.screens.HomeScreen
 import com.example.flightsearchapp.ui.viewmodel.FlightSearchViewModel
 import com.example.flightsearchapp.utils.emptyAirportData

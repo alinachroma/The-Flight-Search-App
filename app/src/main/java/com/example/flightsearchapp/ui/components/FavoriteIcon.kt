@@ -1,4 +1,4 @@
-package com.example.flightsearchapp.ui.items
+package com.example.flightsearchapp.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
