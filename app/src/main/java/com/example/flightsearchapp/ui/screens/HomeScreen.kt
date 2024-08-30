@@ -70,6 +70,27 @@ fun HomeScreen(
                 onFavoriteRouteClicked = onFavoriteRouteClicked,
                 isFavoriteButtonFilled = isFavoriteButtonFilled
             )
+        } else if (searchText.isBlank()) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(favorites) { favoriteRoute ->
+                    airports.find {
+                        it.iataCode == favoriteRoute.departureIata
+                    }?.let { airport ->
+                        RouteItem(
+                            departureIata = favoriteRoute.departureIata,
+                            destinationIata = favoriteRoute.destinationIata,
+                            departureName = airport.name,
+                            destinationName = airports.firstOrNull {
+                                it.iataCode == favoriteRoute.destinationIata
+                            }?.name ?: "",
+                            onFavoriteRouteClicked = onFavoriteRouteClicked,
+                            isFavoriteButtonFilled = isFavoriteButtonFilled,
+                        )
+                    }
+                }
+            }
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
