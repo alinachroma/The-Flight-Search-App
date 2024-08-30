@@ -53,7 +53,7 @@ fun HomeScreen(
             value = searchText,
             onValueChange = onSearchTextChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(text = stringResource(R.string.search)) }
+            placeholder = { Text(text = stringResource(R.string.user_input)) }
         )
         Spacer(modifier = Modifier.height(16.dp))
         if (isSearching) {

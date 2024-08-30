@@ -2,6 +2,6 @@
     <string name="app_name">Flight Search</string>
     <string name="depart">Depart</string>
     <string name="arrive">Arrive</string>
-    <string name="search">Search</string>
+    <string name="user_input">Enter departure airport</string>
     <string name="favorite">Favorite</string>
 </resources>
