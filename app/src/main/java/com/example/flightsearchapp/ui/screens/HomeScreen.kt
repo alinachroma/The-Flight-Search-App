@@ -23,6 +23,8 @@ import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.components.AirportInfoItem
+import com.example.flightsearchapp.ui.components.AirportsListItem
+import com.example.flightsearchapp.ui.components.FavoriteRoutesItem
 import com.example.flightsearchapp.ui.components.RouteItem
 import com.example.flightsearchapp.ui.components.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
@@ -46,8 +48,7 @@ fun HomeScreen(
     selectedAirport: Airport?
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
     ) {
         TextField(
             value = searchText,
@@ -71,42 +72,17 @@ fun HomeScreen(
                 isFavoriteButtonFilled = isFavoriteButtonFilled
             )
         } else if (searchText.isBlank()) {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(favorites) { favoriteRoute ->
-                    airports.find { it.iataCode == favoriteRoute.departureIata
-                    }?.let {
-                        airport -> airports.find { it.iataCode == favoriteRoute.destinationIata }?.name
-                            ?.let {
-                            RouteItem(
-                                departureIata = favoriteRoute.departureIata,
-                                destinationIata = favoriteRoute.destinationIata,
-                                departureName = airport.name,
-                                destinationName = it,
-                                onFavoriteRouteClicked = onFavoriteRouteClicked,
-                                isFavoriteButtonFilled = isFavoriteButtonFilled,
-                            )
-                        }
-                    }
-                }
-            }
+            FavoriteRoutesItem(
+                favorites = favorites,
+                airports = airports,
+                onFavoriteRouteClicked = onFavoriteRouteClicked,
+                isFavoriteButtonFilled = isFavoriteButtonFilled
+            )
         } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                items(airports) { airport ->
-                    Row(modifier = Modifier
-                        .clickable { onAirportSelected(airport) }
-                    ) {
-                        AirportInfoItem(
-                            modifier = Modifier,
-                            iataCode = airport.iataCode,
-                            name = airport.name
-                        )
-                    }
-                }
-            }
+            AirportsListItem(
+                airports = airports,
+                onAirportSelected = onAirportSelected
+            )
         }
     }
 }
