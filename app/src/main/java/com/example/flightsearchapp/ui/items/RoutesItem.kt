@@ -28,14 +28,14 @@ fun RouteItem(
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-    ) {
+    Card {
         Row(
-            modifier = Modifier.padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            modifier = modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(text = stringResource(id = R.string.depart))
                 AirportInfoItem(
                     modifier = Modifier,
