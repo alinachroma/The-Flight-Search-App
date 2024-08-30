@@ -95,7 +95,6 @@ class FlightSearchViewModel(
                 )
             } else {
                 favoriteRouteRepository.insertFavoriteRoute(route)
-
             }
             updateFavoriteRoutes()
         }
