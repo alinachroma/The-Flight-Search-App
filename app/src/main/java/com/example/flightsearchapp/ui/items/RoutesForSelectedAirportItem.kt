@@ -26,8 +26,10 @@ fun RoutesForSelectedAirportItem(
         items(arrivalsForSelectedAirport) { destinationAirport ->
             RouteItem(
                 modifier = modifier,
-                selectedAirport = selectedAirport,
-                destinationAirport = destinationAirport,
+                departureName = selectedAirport.name,
+                destinationName = destinationAirport.name,
+                departureIata = selectedAirport.iataCode,
+                destinationIata = destinationAirport.iataCode,
                 onFavoriteRouteClicked = onFavoriteRouteClicked,
                 isFavoriteButtonFilled = isFavoriteButtonFilled
             )

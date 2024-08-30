@@ -14,14 +14,15 @@ import com.example.flightsearchapp.utils.fakeAirportsData
 @Composable
 fun AirportInfoItem(
     modifier: Modifier,
-    airport: Airport
+    iataCode: String,
+    name: String
 ) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        Text(text = airport.iataCode)
-        Text(text = airport.name)
+        Text(text = iataCode)
+        Text(text = name)
     }
 }
 
@@ -30,7 +31,8 @@ fun AirportInfoItem(
 fun AirportInfoItemPreview() {
     FlightSearchAppTheme {
         AirportInfoItem(
-            airport = fakeAirportsData.first(),
+            iataCode = fakeAirportsData.first().iataCode,
+            name = fakeAirportsData.first().name,
             modifier = Modifier
         )
     }
