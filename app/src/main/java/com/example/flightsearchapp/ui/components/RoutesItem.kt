@@ -49,7 +49,7 @@ fun RouteItem(
                     name = destinationName
                 )
             }
-            FavoriteIcon(
+            FavoriteButton(
                 onFavoriteRouteClicked = onFavoriteRouteClicked,
                 isFavoriteButtonFilled = isFavoriteButtonFilled,
                 route = FavoriteRoute(

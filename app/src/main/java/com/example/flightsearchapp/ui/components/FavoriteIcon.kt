@@ -15,7 +15,7 @@ import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
 
 @Composable
-fun FavoriteIcon(
+fun FavoriteButton(
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
     route: FavoriteRoute,
@@ -40,7 +40,7 @@ fun FavoriteIcon(
 @Composable
 fun FavoriteIconPreview() {
     FlightSearchAppTheme {
-        FavoriteIcon(
+        FavoriteButton(
             onFavoriteRouteClicked = {},
             isFavoriteButtonFilled = { true },
             route = FavoriteRoute(
