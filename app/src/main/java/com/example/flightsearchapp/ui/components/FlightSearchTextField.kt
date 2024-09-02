@@ -26,6 +26,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
+import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
+import com.example.flightsearchapp.utils.ThemePreviews
 
 @Composable
 fun FlightSearchTextField(
@@ -79,6 +81,17 @@ fun FlightSearchTextField(
                     shape = CircleShape
                 )
                 .focusRequester(focusRequester)
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+fun FlightSearchTextFieldPreview() {
+    FlightSearchAppTheme {
+        FlightSearchTextField(
+            searchText = stringResource(id = R.string.user_input),
+            onSearchTextChange = {}
         )
     }
 }
