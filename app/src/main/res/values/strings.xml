@@ -4,4 +4,6 @@
     <string name="arrive">Arrive</string>
     <string name="user_input">Enter departure airport</string>
     <string name="favorite">Favorite</string>
+    <string name="flights_from">Flights from %s</string>
+    <string name="favorite_routes">Favorite routes</string>
 </resources>
