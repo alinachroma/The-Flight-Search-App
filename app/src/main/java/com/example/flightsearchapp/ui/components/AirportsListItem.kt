@@ -31,3 +31,13 @@ fun AirportsListItem(
         }
     }
 }
+
+@ThemePreviews
+@Composable
+fun AirportsListItemPreview() {
+    FlightSearchAppTheme {
+        AirportsListItem(
+            airports = fakeAirportsData,
+            onAirportSelected = {})
+    }
+}

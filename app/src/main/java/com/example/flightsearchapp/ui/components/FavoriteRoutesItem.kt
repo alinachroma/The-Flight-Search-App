@@ -39,3 +39,22 @@ fun FavoriteRoutesItem(
         }
     }
 }
+
+@ThemePreviews
+@Composable
+fun FavoriteRoutesItemPreview() {
+    FlightSearchAppTheme {
+        FavoriteRoutesItem(
+            favorites = listOf(
+                FavoriteRoute(
+                    id = 86,
+                    departureIata = "DUS",
+                    destinationIata = "MUC"
+                )
+            ),
+            airports = fakeAirportsData,
+            onFavoriteRouteClicked = {},
+            isFavoriteButtonFilled = { true }
+        )
+    }
+}
