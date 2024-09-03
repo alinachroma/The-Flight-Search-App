@@ -2,8 +2,10 @@ package com.example.flightsearchapp.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -19,11 +21,16 @@ fun AirportInfoItem(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = iataCode)
+        Text(
+            text = iataCode,
+            style = MaterialTheme.typography.titleMedium
+        )
         Text(
             text = name,
+            style = MaterialTheme.typography.displayMedium,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

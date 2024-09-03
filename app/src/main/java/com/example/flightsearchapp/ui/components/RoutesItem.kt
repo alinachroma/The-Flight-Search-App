@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
@@ -30,25 +33,33 @@ fun RouteItem(
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
 ) {
     Card(
-        shape = RoundedCornerShape(
-            topEndPercent = 15
-        )
+        shape = RoundedCornerShape(topEndPercent = 15)
     ) {
         Row(
             modifier = modifier
-                .padding(8.dp)
+                .padding(dimensionResource(id = R.dimen.padding_large))
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = stringResource(id = R.string.depart))
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
+            ) {
+                Text(
+                    text = stringResource(id = R.string.depart).uppercase(),
+                    style = MaterialTheme.typography.titleSmall
+                )
                 AirportInfoItem(
                     modifier = Modifier,
                     iataCode = departureIata,
-                    name = departureName
-
+                    name = departureName,
                 )
-                Text(text = stringResource(id = R.string.arrive))
+                Text(
+                    text = stringResource(id = R.string.arrive).uppercase(),
+                    style = MaterialTheme.typography.titleSmall
+                )
+
                 AirportInfoItem(
                     modifier = Modifier,
                     iataCode = destinationIata,
