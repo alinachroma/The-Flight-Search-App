@@ -7,18 +7,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.components.AirportsListItem
 import com.example.flightsearchapp.ui.components.FavoriteRoutesItem
 import com.example.flightsearchapp.ui.components.FlightSearchTextField
+import com.example.flightsearchapp.ui.components.FlightSearchTitleItem
 import com.example.flightsearchapp.ui.components.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
@@ -56,14 +59,11 @@ fun HomeScreen(
         }
         if (isAirportSelected) {
             if (selectedAirport != null) {
-                Text(
-                    modifier = Modifier
-                        .padding(
-                            start = dimensionResource(id = R.dimen.padding_medium),
-                            top = dimensionResource(id = R.dimen.padding_small),
-                            bottom = dimensionResource(id = R.dimen.padding_small)
-                        ),
-                    text = stringResource(R.string.flights_from, selectedAirport.iataCode)
+                FlightSearchTitleItem(
+                    text = stringResource(
+                        R.string.flights_from,
+                        selectedAirport.iataCode
+                    ),
                 )
             }
             RoutesForSelectedAirportItem(
@@ -73,15 +73,7 @@ fun HomeScreen(
                 isFavoriteButtonFilled = isFavoriteButtonFilled
             )
         } else if (searchText.isBlank()) {
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = dimensionResource(id = R.dimen.padding_medium),
-                        top = dimensionResource(id = R.dimen.padding_small),
-                        bottom = dimensionResource(id = R.dimen.padding_small)
-                    ),
-                text = stringResource(id = R.string.favorite_routes)
-            )
+            FlightSearchTitleItem(text = stringResource(id = R.string.favorite_routes))
             FavoriteRoutesItem(
                 favorites = favorites,
                 airports = airports,
