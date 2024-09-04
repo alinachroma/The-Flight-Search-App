@@ -1,20 +1,19 @@
 package com.example.flightsearchapp.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
 import com.example.flightsearchapp.model.FavoriteRoute
@@ -28,6 +27,7 @@ import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.emptyAirportData
 import com.example.flightsearchapp.utils.fakeAirportsData
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -66,21 +66,44 @@ fun HomeScreen(
                     ),
                 )
             }
+        }
+        AnimatedVisibility(
+            visible = isAirportSelected
+        ) {
             RoutesForSelectedAirportItem(
                 arrivalsForSelectedAirport = arrivalsForSelectedAirport,
                 selectedAirport = selectedAirport ?: emptyAirportData,
                 onFavoriteRouteClicked = onFavoriteRouteClicked,
-                isFavoriteButtonFilled = isFavoriteButtonFilled
+                isFavoriteButtonFilled = isFavoriteButtonFilled,
+                modifier = Modifier.animateEnterExit(
+                    enter = expandVertically(
+                        animationSpec = tween(500),
+                        expandFrom = Alignment.Top
+                    ) + fadeIn(
+                        initialAlpha = 0.3f
+                    ),
+                    exit = shrinkVertically()
+                )
             )
-        } else if (searchText.isBlank()) {
+        }
+        if (searchText.isBlank() && !isAirportSelected) {
             FlightSearchTitleItem(text = stringResource(id = R.string.favorite_routes))
+        }
+        AnimatedVisibility(
+            visible = searchText.isBlank() && !isAirportSelected
+        ) {
             FavoriteRoutesItem(
                 favorites = favorites,
                 airports = airports,
                 onFavoriteRouteClicked = onFavoriteRouteClicked,
-                isFavoriteButtonFilled = isFavoriteButtonFilled
+                isFavoriteButtonFilled = isFavoriteButtonFilled,
+                modifier = Modifier.animateEnterExit(
+                    enter = expandVertically(animationSpec = tween(500)),
+                    exit = shrinkVertically()
+                )
             )
-        } else {
+        }
+        if (searchText.isNotBlank() && !isAirportSelected) {
             AirportsListItem(
                 airports = airports,
                 onAirportSelected = onAirportSelected
