@@ -40,7 +40,7 @@ fun FavoriteRoutesItem(
                             departureName = airport.name,
                             destinationName = it,
                             onFavoriteRouteClicked = onFavoriteRouteClicked,
-                            isFavoriteButtonFilled = isFavoriteButtonFilled,
+                            isFavoriteButtonFilled = isFavoriteButtonFilled
                         )
                     }
             }

@@ -25,7 +25,7 @@ fun FlightSearchTitleItem(
                 bottom = dimensionResource(id = R.dimen.padding_small)
             ),
         text = text,
-        style = MaterialTheme.typography.displaySmall,
+        style = MaterialTheme.typography.titleMedium,
     )
 }
 
