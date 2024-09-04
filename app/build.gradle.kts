@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.datastore)
     implementation(libs.androidx.datastore.preferences.core.jvm)
+    implementation(libs.androidx.ui.text.google.fonts)
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
