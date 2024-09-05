@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,13 +26,13 @@ import com.example.flightsearchapp.ui.components.AirportsListItem
 import com.example.flightsearchapp.ui.components.FavoriteRoutesItem
 import com.example.flightsearchapp.ui.components.FlightSearchTextField
 import com.example.flightsearchapp.ui.components.FlightSearchTitleItem
+import com.example.flightsearchapp.ui.components.RouteItem
 import com.example.flightsearchapp.ui.components.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.emptyAirportData
 import com.example.flightsearchapp.utils.fakeAirportsData
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -44,7 +46,8 @@ fun HomeScreen(
     arrivalsForSelectedAirport: List<Airport>,
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
-    selectedAirport: Airport?
+    selectedAirport: Airport?,
+    isFirstLaunch: Boolean,
 ) {
     Column(
         modifier = modifier
@@ -91,22 +94,26 @@ fun HomeScreen(
                 )
             )
         }
-        if (searchText.isBlank() && !isAirportSelected) {
+        if (!isFirstLaunch && searchText.isBlank() && !isAirportSelected) {
             FlightSearchTitleItem(text = stringResource(id = R.string.favorite_routes))
         }
         AnimatedVisibility(
-            visible = searchText.isBlank() && !isAirportSelected
+            visible = !isFirstLaunch && searchText.isBlank() && !isAirportSelected
         ) {
-            FavoriteRoutesItem(
-                favorites = favorites,
-                airports = airports,
-                onFavoriteRouteClicked = onFavoriteRouteClicked,
-                isFavoriteButtonFilled = isFavoriteButtonFilled,
-                modifier = Modifier.animateEnterExit(
-                    enter = expandVertically(animationSpec = tween(500)),
-                    exit = shrinkVertically()
+            if (isFirstLaunch && favorites.isEmpty()) {
+                WelcomeScreen()
+            } else {
+                FavoriteRoutesItem(
+                    favorites = favorites,
+                    airports = airports,
+                    onFavoriteRouteClicked = onFavoriteRouteClicked,
+                    isFavoriteButtonFilled = isFavoriteButtonFilled,
+                    modifier = Modifier.animateEnterExit(
+                        enter = expandVertically(animationSpec = tween(500)),
+                        exit = shrinkVertically()
+                    )
                 )
-            )
+            }
         }
         if (searchText.isNotBlank() && !isAirportSelected) {
             AirportsListItem(
