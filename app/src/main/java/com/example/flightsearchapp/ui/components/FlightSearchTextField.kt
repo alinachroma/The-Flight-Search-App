@@ -67,9 +67,7 @@ fun FlightSearchTextField(
             interactionSource = interactionSource,
             placeholder = { Text(text = stringResource(R.string.user_input)) },
             colors = TextFieldDefaults.colors(
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
+                unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
             ),
             modifier = Modifier
                 .fillMaxWidth()
