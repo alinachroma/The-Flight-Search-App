@@ -37,8 +37,6 @@ val Tiny5Regular = FontFamily(
     Font(R.font.tiny_5_regular, FontWeight.Normal)
 )
 
-val gradientColors = listOf(Color.Cyan, Color.Blue)
-
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = bodyFontFamily,
