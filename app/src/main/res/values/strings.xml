@@ -6,4 +6,6 @@
     <string name="favorite">Favorite</string>
     <string name="flights_from">Flights from %s</string>
     <string name="favorite_routes">Favorite routes</string>
+    <string name="welcome">Welcome to the App!</string>
+    <string name="lets_search">Let\'s search for flights.</string>
 </resources>
