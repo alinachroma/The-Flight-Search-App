@@ -11,9 +11,9 @@ import com.example.flightsearchapp.data.OfflineAirportRepository
 import com.example.flightsearchapp.data.OfflineFavoriteRouteRepository
 import com.example.flightsearchapp.data.UserPreferencesRepository
 
-private const val SEARCH_STRING_NAME = "search_string"
+private const val PREFERENCES_NAME = "flight_search_preferences"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-    name = SEARCH_STRING_NAME
+    name = PREFERENCES_NAME
 )
 
 class FlightSearchApplication: Application() {

@@ -17,6 +17,7 @@ class UserPreferencesRepository(
 ) {
     private companion object {
         val SEARCH_STRING = stringPreferencesKey("search_string")
+        val FIRST_LAUNCH = booleanPreferencesKey("first_launch")
         const val TAG = "UserPreferencesRepo"
     }
 
@@ -25,6 +26,16 @@ class UserPreferencesRepository(
             mutablePreferences -> mutablePreferences[SEARCH_STRING] = searchString
         }
     }
+
+    suspend fun saveFirstLaunchBooleanPreference(firstLaunch: Boolean) {
+        dataStore.edit {
+                mutablePreferences -> mutablePreferences[FIRST_LAUNCH] = firstLaunch
+        }
+    }
+
+    val firstLaunch: Flow<Boolean> = dataStore.data
+        .map { preferences -> preferences[FIRST_LAUNCH] ?: false
+        }
 
     val searchString: Flow<String> = dataStore.data
         .catch {
