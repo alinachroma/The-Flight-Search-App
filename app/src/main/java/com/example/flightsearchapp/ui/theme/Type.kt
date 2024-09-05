@@ -1,6 +1,8 @@
 package com.example.flightsearchapp.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.VectorProperty
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -35,8 +37,7 @@ val Tiny5Regular = FontFamily(
     Font(R.font.tiny_5_regular, FontWeight.Normal)
 )
 
-// Default Material 3 typography values
-val baseline = Typography()
+val gradientColors = listOf(Color.Cyan, Color.Blue)
 
 val Typography = Typography(
     bodyLarge = TextStyle(
@@ -54,6 +55,9 @@ val Typography = Typography(
         letterSpacing = 0.sp
     ),
     titleLarge = TextStyle(
+        brush = Brush.linearGradient(
+            colors = gradientColors
+        ),
         fontFamily = Tiny5Regular,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
