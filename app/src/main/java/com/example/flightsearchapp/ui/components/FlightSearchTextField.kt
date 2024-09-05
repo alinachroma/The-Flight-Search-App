@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
+import com.example.flightsearchapp.ui.theme.gradientColors
 import com.example.flightsearchapp.utils.ThemePreviews
 
 @Composable
@@ -54,7 +55,7 @@ fun FlightSearchTextField(
                 focusManager.clearFocus(true)
             }
             .shadow(
-                ambientColor = Color.Blue,
+                ambientColor = gradientColors.last(),
                 spotColor = Color.Cyan,
                 elevation = if (isFocused) 15.dp else 0.dp,
                 clip = true,
