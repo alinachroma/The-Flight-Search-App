@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +34,12 @@ fun RouteItem(
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
 ) {
     Card(
-        shape = RoundedCornerShape(topEndPercent = 15)
+        modifier = modifier
+            .padding(dimensionResource(id = R.dimen.padding_small)),
+        shape = RoundedCornerShape(topEndPercent = 15),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        )
     ) {
         Row(
             modifier = Modifier
