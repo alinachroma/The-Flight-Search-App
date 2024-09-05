@@ -26,7 +26,10 @@ fun FavoriteRoutesItem(
     LazyColumn(
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
-        items(favorites) { favoriteRoute ->
+        items(
+            items = favorites,
+            key = { it.id }
+        ) { favoriteRoute ->
             airports.find {
                 it.iataCode == favoriteRoute.departureIata
             }?.let { airport ->
@@ -38,7 +41,8 @@ fun FavoriteRoutesItem(
                             departureName = airport.name,
                             destinationName = it,
                             onFavoriteRouteClicked = onFavoriteRouteClicked,
-                            isFavoriteButtonFilled = isFavoriteButtonFilled
+                            isFavoriteButtonFilled = isFavoriteButtonFilled,
+                            modifier = Modifier.animateItem()
                         )
                     }
             }
