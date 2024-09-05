@@ -10,4 +10,5 @@ data class FlightSearchUiState(
     val isAirportSelected: Boolean = false,
     val selectedAirport: Airport? = null,
     var favoriteRoutes: List<FavoriteRoute> = emptyList(),
+    val isFirstLaunch: Boolean = false
 )

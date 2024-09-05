@@ -33,6 +33,11 @@ class FlightSearchViewModel(
         viewModelScope.launch {
             onSearchTextChange(userPreferencesRepository.searchString.first())
             updateFavoriteRoutes()
+
+            if (!userPreferencesRepository.firstLaunch.first()) {
+                userPreferencesRepository.saveFirstLaunchBooleanPreference(true)
+                setFirstLaunch()
+            }
         }
     }
 
@@ -104,6 +109,15 @@ class FlightSearchViewModel(
             _flightSearchUiState.update { uiState ->
                 uiState.copy(
                     favoriteRoutes = favoriteRouteRepository.getFavoriteRoutes().first()
+                )
+            }
+        }
+
+    private fun setFirstLaunch() =
+        viewModelScope.launch {
+            _flightSearchUiState.update { uiState ->
+                uiState.copy(
+                   isFirstLaunch = true
                 )
             }
         }
