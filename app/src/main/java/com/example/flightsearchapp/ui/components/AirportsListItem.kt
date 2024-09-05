@@ -25,7 +25,7 @@ fun AirportsListItem(
     LazyColumn(
         modifier = modifier
             .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_medium)),
+            .padding(dimensionResource(id = R.dimen.padding_large)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
     ) {
         items(airports) { airport ->

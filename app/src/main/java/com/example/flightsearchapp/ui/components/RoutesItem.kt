@@ -36,8 +36,8 @@ fun RouteItem(
         shape = RoundedCornerShape(topEndPercent = 15)
     ) {
         Row(
-            modifier = modifier
-                .padding(dimensionResource(id = R.dimen.padding_large))
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_medium))
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically

@@ -24,9 +24,8 @@ fun FavoriteRoutesItem(
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
 ) {
     LazyColumn(
-        modifier = modifier
-            .padding(dimensionResource(id = R.dimen.padding_medium)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
         items(favorites) { favoriteRoute ->
             airports.find {

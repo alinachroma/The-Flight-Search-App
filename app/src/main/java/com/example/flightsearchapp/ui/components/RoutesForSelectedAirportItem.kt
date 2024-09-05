@@ -1,6 +1,5 @@
 package com.example.flightsearchapp.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,9 +23,7 @@ fun RoutesForSelectedAirportItem(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier
-            .padding(dimensionResource(id = R.dimen.padding_medium)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
     ) {
         items(arrivalsForSelectedAirport) { destinationAirport ->
             RouteItem(
