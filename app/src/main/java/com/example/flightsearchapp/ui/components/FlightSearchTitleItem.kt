@@ -21,10 +21,10 @@ fun FlightSearchTitleItem(
         modifier = modifier
             .padding(
                 start = dimensionResource(id = R.dimen.padding_large),
-                top = dimensionResource(id = R.dimen.padding_small),
-                bottom = dimensionResource(id = R.dimen.padding_small)
+                top = dimensionResource(id = R.dimen.padding_small)
             ),
         text = text,
+        color = MaterialTheme.colorScheme.inverseSurface,
         style = MaterialTheme.typography.titleMedium,
     )
 }
