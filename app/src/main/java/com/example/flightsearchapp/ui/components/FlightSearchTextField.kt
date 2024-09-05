@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -27,9 +28,11 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
+import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.ui.theme.gradientColors
 import com.example.flightsearchapp.utils.ThemePreviews
+import com.example.flightsearchapp.utils.fakeAirportsData
 
 @Composable
 fun FlightSearchTextField(
@@ -89,9 +92,13 @@ fun FlightSearchTextField(
 @Composable
 fun FlightSearchTextFieldPreview() {
     FlightSearchAppTheme {
-        FlightSearchTextField(
-            searchText = stringResource(id = R.string.user_input),
-            onSearchTextChange = {}
-        )
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            FlightSearchTextField(
+                searchText = stringResource(id = R.string.user_input),
+                onSearchTextChange = {}
+            )
+        }
     }
 }

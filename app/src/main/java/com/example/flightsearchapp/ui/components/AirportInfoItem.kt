@@ -3,6 +3,7 @@ package com.example.flightsearchapp.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -10,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.flightsearchapp.model.FavoriteRoute
+import com.example.flightsearchapp.ui.components.buttons.FavoriteButton
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
@@ -43,10 +46,14 @@ fun AirportInfoItem(
 @Composable
 fun AirportInfoItemPreview() {
     FlightSearchAppTheme {
-        AirportInfoItem(
-            iataCode = fakeAirportsData.first().iataCode,
-            name = fakeAirportsData.first().name,
-            modifier = Modifier
-        )
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            AirportInfoItem(
+                iataCode = fakeAirportsData.first().iataCode,
+                name = fakeAirportsData.first().name,
+                modifier = Modifier
+            )
+        }
     }
 }

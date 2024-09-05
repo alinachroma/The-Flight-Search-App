@@ -3,6 +3,7 @@ package com.example.flightsearchapp.ui.components
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
+import com.example.flightsearchapp.utils.fakeAirportsData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,6 +40,10 @@ fun FlightSearchTopAppBar(modifier: Modifier = Modifier) {
 @Composable
 fun FlightSearchTopAppBarPreview() {
     FlightSearchAppTheme {
-        FlightSearchTopAppBar()
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            FlightSearchTopAppBar()
+        }
     }
 }

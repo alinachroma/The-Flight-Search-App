@@ -7,6 +7,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalRippleConfiguration
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.FavoriteRoute
+import com.example.flightsearchapp.ui.screens.WelcomeScreen
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.ui.theme.starIconGradient
 import com.example.flightsearchapp.utils.ThemePreviews
@@ -74,14 +77,18 @@ fun FavoriteButton(
 @Composable
 fun FavoriteIconPreview() {
     FlightSearchAppTheme {
-        FavoriteButton(
-            onFavoriteRouteClicked = {},
-            isFavoriteButtonFilled = { true },
-            route = FavoriteRoute(
-                id = 234,
-                departureIata = fakeAirportsData.first().name,
-                destinationIata = fakeAirportsData.first().iataCode
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            FavoriteButton(
+                onFavoriteRouteClicked = {},
+                isFavoriteButtonFilled = { true },
+                route = FavoriteRoute(
+                    id = 234,
+                    departureIata = fakeAirportsData.first().name,
+                    destinationIata = fakeAirportsData.first().iataCode
+                )
             )
-        )
+        }
     }
 }

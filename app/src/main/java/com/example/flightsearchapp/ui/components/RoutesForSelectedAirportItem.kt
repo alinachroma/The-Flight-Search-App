@@ -3,6 +3,8 @@ package com.example.flightsearchapp.ui.components
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -41,14 +43,19 @@ fun RoutesForSelectedAirportItem(
 
 @ThemePreviews
 @Composable
-fun RoutesForSelectedAirportItemPreview() {
+fun RoutesForSelectedAirportItemPreview(
+) {
     FlightSearchAppTheme {
-        RoutesForSelectedAirportItem(
-            arrivalsForSelectedAirport = fakeAirportsData,
-            selectedAirport = fakeAirportsData.first(),
-            onFavoriteRouteClicked = {},
-            isFavoriteButtonFilled = { true },
-            modifier = Modifier
-        )
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            RoutesForSelectedAirportItem(
+                arrivalsForSelectedAirport = fakeAirportsData,
+                selectedAirport = fakeAirportsData.first(),
+                onFavoriteRouteClicked = {},
+                isFavoriteButtonFilled = { true },
+                modifier = Modifier
+            )
+        }
     }
 }

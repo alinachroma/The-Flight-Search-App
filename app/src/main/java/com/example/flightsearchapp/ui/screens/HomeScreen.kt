@@ -121,18 +121,23 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     FlightSearchAppTheme {
-        HomeScreen(
-            searchText = "M",
-            airports = fakeAirportsData,
-            isSearching = false,
-            onSearchTextChange = { },
-            isAirportSelected = false,
-            onAirportSelected = { },
-            selectedAirport = fakeAirportsData.first(),
-            arrivalsForSelectedAirport = fakeAirportsData,
-            onFavoriteRouteClicked = {},
-            isFavoriteButtonFilled = { true },
-            favorites = emptyList()
-        )
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            HomeScreen(
+                searchText = "M",
+                airports = fakeAirportsData,
+                isSearching = false,
+                onSearchTextChange = { },
+                isAirportSelected = false,
+                onAirportSelected = { },
+                selectedAirport = fakeAirportsData.first(),
+                arrivalsForSelectedAirport = fakeAirportsData,
+                onFavoriteRouteClicked = {},
+                isFavoriteButtonFilled = { true },
+                favorites = emptyList(),
+                isFirstLaunch = false
+            )
+        }
     }
 }

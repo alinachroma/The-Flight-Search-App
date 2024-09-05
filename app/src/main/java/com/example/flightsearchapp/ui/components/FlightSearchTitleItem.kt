@@ -33,10 +33,14 @@ fun FlightSearchTitleItem(
 @Composable
 fun FlightSearchTitleItemPreview() {
     FlightSearchAppTheme {
-        FlightSearchTitleItem(
-            text = stringResource(
-                id = R.string.flights_from, fakeAirportsData.first().iataCode
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            FlightSearchTitleItem(
+                text = stringResource(
+                    id = R.string.flights_from, fakeAirportsData.first().iataCode
+                )
             )
-        )
+        }
     }
 }

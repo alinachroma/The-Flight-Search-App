@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -54,17 +56,21 @@ fun FavoriteRoutesItem(
 @Composable
 fun FavoriteRoutesItemPreview() {
     FlightSearchAppTheme {
-        FavoriteRoutesItem(
-            favorites = listOf(
-                FavoriteRoute(
-                    id = 86,
-                    departureIata = "DUS",
-                    destinationIata = "MUC"
-                )
-            ),
-            airports = fakeAirportsData,
-            onFavoriteRouteClicked = {},
-            isFavoriteButtonFilled = { true }
-        )
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            FavoriteRoutesItem(
+                favorites = listOf(
+                    FavoriteRoute(
+                        id = 86,
+                        departureIata = "DUS",
+                        destinationIata = "MUC"
+                    )
+                ),
+                airports = fakeAirportsData,
+                onFavoriteRouteClicked = {},
+                isFavoriteButtonFilled = { true }
+            )
+        }
     }
 }
