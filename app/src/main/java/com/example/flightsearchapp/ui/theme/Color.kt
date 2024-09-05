@@ -2,6 +2,11 @@ package com.example.flightsearchapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val starIconGradient = listOf(
+    Color(0xFFFFAB61),
+    Color(0xFF631C13)
+)
+
 val primaryLight = Color(0xFF00696E)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFF9CF0F5)
