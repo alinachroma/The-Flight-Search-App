@@ -7,13 +7,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.FavoriteRoute
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
+import com.example.flightsearchapp.ui.theme.starIconGradient
 import com.example.flightsearchapp.utils.ThemePreviews
 import com.example.flightsearchapp.utils.fakeAirportsData
 
@@ -32,9 +36,29 @@ fun FavoriteButton(
         }
     ) {
         Icon(
-            modifier = Modifier.size(dimensionResource(id = R.dimen.icon_standard)),
+            modifier = Modifier
+                .size(dimensionResource(id = R.dimen.icon_standard))
+                .let {
+                    if (isFavoriteButtonFilled(route)) {
+                        return@let it
+                            .graphicsLayer(alpha = 0.99f)
+                            .drawWithCache {
+                                val brush = Brush.linearGradient(
+                                    starIconGradient
+                                )
+                                onDrawWithContent {
+                                    drawContent()
+                                    drawRect(
+                                        brush = brush,
+                                        blendMode = BlendMode.SrcAtop
+                                    )
+                                }
+                            }
+                    }
+                    it
+                },
             imageVector = Icons.Default.Star,
-            tint = if (isFavoriteButtonFilled(route)) Color.Red else Color.LightGray,
+            tint = Color.LightGray,
             contentDescription = stringResource(id = R.string.favorite)
         )
     }
