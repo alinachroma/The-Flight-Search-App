@@ -76,7 +76,7 @@ fun HomeScreen(
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         if (favorites.isEmpty()) {
-                            Text(text = "ADD FAVORITES")
+                            NoFavoritesScreen()
                         } else {
                             FlightSearchTitleItem(text = stringResource(id = R.string.favorite_routes))
                             FavoriteRoutesItem(
