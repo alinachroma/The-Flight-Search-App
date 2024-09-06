@@ -1,12 +1,12 @@
 package com.example.flightsearchapp.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.example.flightsearchapp.R
 import com.example.flightsearchapp.model.Airport
@@ -26,7 +25,6 @@ import com.example.flightsearchapp.ui.components.AirportsListItem
 import com.example.flightsearchapp.ui.components.FavoriteRoutesItem
 import com.example.flightsearchapp.ui.components.FlightSearchTextField
 import com.example.flightsearchapp.ui.components.FlightSearchTitleItem
-import com.example.flightsearchapp.ui.components.RouteItem
 import com.example.flightsearchapp.ui.components.RoutesForSelectedAirportItem
 import com.example.flightsearchapp.ui.theme.FlightSearchAppTheme
 import com.example.flightsearchapp.utils.ThemePreviews
@@ -47,17 +45,13 @@ fun HomeScreen(
     onFavoriteRouteClicked: (FavoriteRoute) -> Unit,
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
     selectedAirport: Airport?,
-    isFirstLaunch: Boolean,
+    isOnboardingVisible: Boolean,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surfaceContainerHigh),
     ) {
-        FlightSearchTextField(
-            searchText = searchText,
-            onSearchTextChange = onSearchTextChange
-        )
         if (isSearching) {
             Box(
                 modifier = Modifier.fillMaxSize()
@@ -65,61 +59,78 @@ fun HomeScreen(
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
         }
-        if (isAirportSelected) {
-            if (selectedAirport != null) {
-                FlightSearchTitleItem(
-                    text = stringResource(
-                        R.string.flights_from,
-                        selectedAirport.iataCode
-                    ),
-                )
+        FlightSearchTextField(
+            searchText = searchText,
+            onSearchTextChange = onSearchTextChange
+        )
+        if (isOnboardingVisible) {
+            WelcomeScreen()
+        }
+        when (searchText.isBlank()) {
+            true -> {
+                AnimatedVisibility(
+                    visible = !isAirportSelected
+                ) {
+                    Column(
+                        modifier = Modifier,
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        if (favorites.isEmpty()) {
+                            Text(text = "ADD FAVORITES")
+                        } else {
+                            FlightSearchTitleItem(text = stringResource(id = R.string.favorite_routes))
+                            FavoriteRoutesItem(
+                                favorites = favorites,
+                                airports = airports,
+                                onFavoriteRouteClicked = onFavoriteRouteClicked,
+                                isFavoriteButtonFilled = isFavoriteButtonFilled,
+                                modifier = Modifier.animateEnterExit(
+                                    enter = expandVertically(animationSpec = tween(500)),
+                                    exit = shrinkVertically()
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+
+            false -> {
+                if (!isAirportSelected) {
+                    AirportsListItem(
+                        airports = airports,
+                        onAirportSelected = onAirportSelected
+                    )
+                }
             }
         }
         AnimatedVisibility(
             visible = isAirportSelected
         ) {
-            RoutesForSelectedAirportItem(
-                arrivalsForSelectedAirport = arrivalsForSelectedAirport,
-                selectedAirport = selectedAirport ?: emptyAirportData,
-                onFavoriteRouteClicked = onFavoriteRouteClicked,
-                isFavoriteButtonFilled = isFavoriteButtonFilled,
-                modifier = Modifier.animateEnterExit(
-                    enter = expandVertically(
-                        animationSpec = tween(500),
-                        expandFrom = Alignment.Top
-                    ) + fadeIn(
-                        initialAlpha = 0.3f
-                    ),
-                    exit = shrinkVertically()
-                )
-            )
-        }
-        if (!isFirstLaunch && searchText.isBlank() && !isAirportSelected) {
-            FlightSearchTitleItem(text = stringResource(id = R.string.favorite_routes))
-        }
-        AnimatedVisibility(
-            visible = !isFirstLaunch && searchText.isBlank() && !isAirportSelected
-        ) {
-            if (isFirstLaunch && favorites.isEmpty()) {
-                WelcomeScreen()
-            } else {
-                FavoriteRoutesItem(
-                    favorites = favorites,
-                    airports = airports,
-                    onFavoriteRouteClicked = onFavoriteRouteClicked,
-                    isFavoriteButtonFilled = isFavoriteButtonFilled,
-                    modifier = Modifier.animateEnterExit(
-                        enter = expandVertically(animationSpec = tween(500)),
-                        exit = shrinkVertically()
+            Column(verticalArrangement = Arrangement.SpaceBetween) {
+                if (selectedAirport != null) {
+                    FlightSearchTitleItem(
+                        text = stringResource(
+                            R.string.flights_from,
+                            selectedAirport.iataCode
+                        ),
                     )
-                )
+                    RoutesForSelectedAirportItem(
+                        arrivalsForSelectedAirport = arrivalsForSelectedAirport,
+                        selectedAirport = selectedAirport ?: emptyAirportData,
+                        onFavoriteRouteClicked = onFavoriteRouteClicked,
+                        isFavoriteButtonFilled = isFavoriteButtonFilled,
+                        modifier = Modifier.animateEnterExit(
+                            enter = expandVertically(
+                                animationSpec = tween(500),
+                                expandFrom = Alignment.Top
+                            ) + fadeIn(
+                                initialAlpha = 0.3f
+                            ),
+                            exit = shrinkVertically()
+                        )
+                    )
+                }
             }
-        }
-        if (searchText.isNotBlank() && !isAirportSelected) {
-            AirportsListItem(
-                airports = airports,
-                onAirportSelected = onAirportSelected
-            )
         }
     }
 }
@@ -143,7 +154,7 @@ fun HomeScreenPreview() {
                 onFavoriteRouteClicked = {},
                 isFavoriteButtonFilled = { true },
                 favorites = emptyList(),
-                isFirstLaunch = false
+                isOnboardingVisible = false
             )
         }
     }
