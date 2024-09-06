@@ -34,26 +34,29 @@ class FlightSearchViewModel(
             onSearchTextChange(userPreferencesRepository.searchString.first())
             updateFavoriteRoutes()
 
-            if (!userPreferencesRepository.firstLaunch.first()) {
-                userPreferencesRepository.saveFirstLaunchBooleanPreference(true)
-                setFirstLaunch()
+            if (!userPreferencesRepository.isOnboardingVisible.first()) {
+                userPreferencesRepository.saveOnboardingVisibilityBooleanPreference(true)
+                setOnboardingVisibilityValue(userPreferencesRepository.isOnboardingVisible.first())
             }
         }
     }
 
-    fun onSearchTextChange(text: String) {
-        _flightSearchUiState.update { uiState ->
-            uiState.copy(
-                searchText = text,
-                isAirportSelected = false
-            )
-        }
+    fun onSearchTextChange(text: String) =
         viewModelScope.launch {
-            userPreferencesRepository.saveSearchStringPreference(text)
-            delay(500)
-            getAirportsBySearchString(text)
+            _flightSearchUiState.update { uiState ->
+                uiState.copy(
+                    searchText = text,
+                    isAirportSelected = false
+                )
+            }
+            viewModelScope.launch {
+                userPreferencesRepository.saveSearchStringPreference(text)
+                delay(500)
+                getAirportsBySearchString(text)
+            }
+            userPreferencesRepository.saveOnboardingVisibilityBooleanPreference(false)
+            setOnboardingVisibilityValue(userPreferencesRepository.isOnboardingVisible.first())
         }
-    }
 
     fun getAirportsBySearchString(searchString: String) =
         viewModelScope.launch {
@@ -113,11 +116,11 @@ class FlightSearchViewModel(
             }
         }
 
-    private fun setFirstLaunch() =
+    private fun setOnboardingVisibilityValue(isOnboardingVisible: Boolean) =
         viewModelScope.launch {
             _flightSearchUiState.update { uiState ->
                 uiState.copy(
-                   isFirstLaunch = true
+                    isOnboardingVisible = isOnboardingVisible
                 )
             }
         }
