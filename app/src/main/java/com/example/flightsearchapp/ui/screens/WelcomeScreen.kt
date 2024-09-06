@@ -42,7 +42,6 @@ fun WelcomeScreen(
             style = MaterialTheme.typography.displayLarge
         )
     }
-
 }
 
 @ThemePreviews
