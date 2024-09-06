@@ -11,6 +11,10 @@ val gradientColors = listOf(
     Color.Cyan, Color(0xFF0076F5)
 )
 
+val blackWhiteGradient = listOf(
+    Color.White, Color.Black
+)
+
 val primaryLight = Color(0xFF00696E)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFF9CF0F5)
