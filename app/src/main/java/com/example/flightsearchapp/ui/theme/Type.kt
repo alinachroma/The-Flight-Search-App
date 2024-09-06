@@ -83,6 +83,13 @@ val Typography = Typography(
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
+    headlineLarge = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 28.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
     displaySmall = TextStyle(
         fontFamily = bodyFontFamily,
         fontWeight = FontWeight.Bold,
