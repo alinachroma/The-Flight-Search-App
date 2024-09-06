@@ -95,41 +95,39 @@ fun HomeScreen(
             }
 
             false -> {
-                if (!isAirportSelected) {
-                    AirportsListItem(
-                        airports = airports,
-                        onAirportSelected = onAirportSelected
-                    )
+                AnimatedVisibility(
+                    visible = isAirportSelected
+                ) {
+                    Column(verticalArrangement = Arrangement.SpaceBetween) {
+                        if (selectedAirport != null) {
+                            FlightSearchTitleItem(
+                                text = stringResource(
+                                    R.string.flights_from,
+                                    selectedAirport.iataCode
+                                ),
+                            )
+                            RoutesForSelectedAirportItem(
+                                arrivalsForSelectedAirport = arrivalsForSelectedAirport,
+                                selectedAirport = selectedAirport,
+                                onFavoriteRouteClicked = onFavoriteRouteClicked,
+                                isFavoriteButtonFilled = isFavoriteButtonFilled,
+                                modifier = Modifier.animateEnterExit(
+                                    enter = expandVertically(
+                                        animationSpec = tween(500),
+                                        expandFrom = Alignment.Top
+                                    ) + fadeIn(
+                                        initialAlpha = 0.3f
+                                    ),
+                                    exit = shrinkVertically()
+                                )
+                            )
+                        }
+                    }
                 }
-            }
-        }
-        AnimatedVisibility(
-            visible = isAirportSelected
-        ) {
-            Column(verticalArrangement = Arrangement.SpaceBetween) {
-                if (selectedAirport != null) {
-                    FlightSearchTitleItem(
-                        text = stringResource(
-                            R.string.flights_from,
-                            selectedAirport.iataCode
-                        ),
-                    )
-                    RoutesForSelectedAirportItem(
-                        arrivalsForSelectedAirport = arrivalsForSelectedAirport,
-                        selectedAirport = selectedAirport ?: emptyAirportData,
-                        onFavoriteRouteClicked = onFavoriteRouteClicked,
-                        isFavoriteButtonFilled = isFavoriteButtonFilled,
-                        modifier = Modifier.animateEnterExit(
-                            enter = expandVertically(
-                                animationSpec = tween(500),
-                                expandFrom = Alignment.Top
-                            ) + fadeIn(
-                                initialAlpha = 0.3f
-                            ),
-                            exit = shrinkVertically()
-                        )
-                    )
-                }
+                AirportsListItem(
+                    airports = airports,
+                    onAirportSelected = onAirportSelected
+                )
             }
         }
     }
