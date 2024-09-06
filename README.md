@@ -1,7 +1,7 @@
 # The Flight Search App
 
 An Android app that lets the user enter an airport and view a list of destinations using that airport as a departure. 
-This project created for demo purposes to demonstrate everything I learned within the "Android Basics with Compose" Course (Unit 6).
+This project is created for demo purposes to demonstrate everything I learned within the "Android Basics with Compose" Course (Unit 6).
 Built fully with Jetpack Compose.
 
 ## Features
