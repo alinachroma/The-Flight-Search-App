@@ -35,8 +35,7 @@ fun RouteItem(
     isFavoriteButtonFilled: (FavoriteRoute) -> Boolean,
 ) {
     Card(
-        modifier = modifier
-            .padding(dimensionResource(id = R.dimen.padding_small)),
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_small)),
         shape = RoundedCornerShape(topEndPercent = 15),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
@@ -66,7 +65,6 @@ fun RouteItem(
                     text = stringResource(id = R.string.arrive).uppercase(),
                     style = MaterialTheme.typography.titleSmall
                 )
-
                 AirportInfoItem(
                     modifier = Modifier,
                     iataCode = destinationIata,
