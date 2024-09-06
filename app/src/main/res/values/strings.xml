@@ -8,4 +8,6 @@
     <string name="favorite_routes">Favorite routes</string>
     <string name="welcome">Welcome to the App!</string>
     <string name="lets_search">Let\'s search for flights.</string>
+    <string name="no_favorites">No favorites yet</string>
+    <string name="add_routes">Add routes to your favorites by clicking \"Star icon\"</string>
 </resources>
