@@ -39,7 +39,7 @@ fun FlightSearchApp(
                     onFavoriteRouteClicked = viewModel::markOrUnmarkAsFavorite,
                     isFavoriteButtonFilled = viewModel::validateFavorite,
                     favorites = flightSearchUiState.value.favoriteRoutes,
-                    isFirstLaunch = flightSearchUiState.value.isFirstLaunch
+                    isOnboardingVisible = flightSearchUiState.value.isOnboardingVisible
                 )
             }
         }

@@ -1,6 +1,7 @@
 package com.example.flightsearchapp.data
 
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
 import androidx.datastore.preferences.core.Preferences
@@ -17,33 +18,35 @@ class UserPreferencesRepository(
 ) {
     private companion object {
         val SEARCH_STRING = stringPreferencesKey("search_string")
-        val FIRST_LAUNCH = booleanPreferencesKey("first_launch")
+        val ONBOARDING_VISIBLE = booleanPreferencesKey("onboarding_visible")
         const val TAG = "UserPreferencesRepo"
     }
 
     suspend fun saveSearchStringPreference(searchString: String) {
-        dataStore.edit {
-            mutablePreferences -> mutablePreferences[SEARCH_STRING] = searchString
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[SEARCH_STRING] = searchString
         }
     }
 
-    suspend fun saveFirstLaunchBooleanPreference(firstLaunch: Boolean) {
-        dataStore.edit {
-                mutablePreferences -> mutablePreferences[FIRST_LAUNCH] = firstLaunch
+    suspend fun saveOnboardingVisibilityBooleanPreference(isOnboardingVisible: Boolean) {
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[ONBOARDING_VISIBLE] = isOnboardingVisible
         }
     }
 
-    val firstLaunch: Flow<Boolean> = dataStore.data
-        .map { preferences -> preferences[FIRST_LAUNCH] ?: false
+    val isOnboardingVisible: Flow<Boolean> = dataStore.data
+        .map { preferences ->
+            preferences[ONBOARDING_VISIBLE] ?: false
         }
 
     val searchString: Flow<String> = dataStore.data
         .catch {
-            if(it is IOException) {
+            if (it is IOException) {
                 Log.e(TAG, "Error reading preferences.", it)
                 emit(emptyPreferences())
             }
         }
-        .map { preferences -> preferences[SEARCH_STRING] ?: ""
-    }
+        .map { preferences ->
+            preferences[SEARCH_STRING] ?: ""
+        }
 }
