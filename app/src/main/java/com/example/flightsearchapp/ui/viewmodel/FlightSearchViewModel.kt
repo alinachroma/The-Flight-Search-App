@@ -33,10 +33,9 @@ class FlightSearchViewModel(
         viewModelScope.launch {
             onSearchTextChange(userPreferencesRepository.searchString.first())
             updateFavoriteRoutes()
-
             if (!userPreferencesRepository.isOnboardingVisible.first()) {
                 userPreferencesRepository.saveOnboardingVisibilityBooleanPreference(true)
-                setOnboardingVisibilityValue(userPreferencesRepository.isOnboardingVisible.first())
+                setOnboardingVisible()
             }
         }
     }
@@ -54,8 +53,15 @@ class FlightSearchViewModel(
                 delay(500)
                 getAirportsBySearchString(text)
             }
-            userPreferencesRepository.saveOnboardingVisibilityBooleanPreference(false)
-            setOnboardingVisibilityValue(userPreferencesRepository.isOnboardingVisible.first())
+            if (userPreferencesRepository.isOnboardingVisible.first()) {
+                viewModelScope.launch {
+                    _flightSearchUiState.update { uiState ->
+                        uiState.copy(
+                            isOnboardingVisible = false
+                        )
+                    }
+                }
+            }
         }
 
     fun getAirportsBySearchString(searchString: String) =
@@ -116,11 +122,11 @@ class FlightSearchViewModel(
             }
         }
 
-    private fun setOnboardingVisibilityValue(isOnboardingVisible: Boolean) =
+    private fun setOnboardingVisible() =
         viewModelScope.launch {
             _flightSearchUiState.update { uiState ->
                 uiState.copy(
-                    isOnboardingVisible = isOnboardingVisible
+                    isOnboardingVisible = true
                 )
             }
         }
