@@ -4,6 +4,14 @@ An Android app that lets the user enter an airport and view a list of destinatio
 This project is created for demo purposes to demonstrate everything I learned within the "Android Basics with Compose" Course (Unit 6).
 Built fully with Jetpack Compose.
 
+## Screenshots
+<img width="700" alt="flightsearch" src="https://github.com/user-attachments/assets/eb3c89eb-a8ef-4183-b044-4686f3634a98">
+
+## Demo
+| Light mode | Dark mode |
+| ------------- | ------------- |
+| <video src="https://github.com/user-attachments/assets/f4f80d44-332c-4ef9-8d15-59e902633346"> | <video src="https://github.com/user-attachments/assets/11c0bccd-0ac7-4317-8b74-8c1e85c06b9d">| 
+
 ## Features
 
 * The app queries the database to provide autocomplete suggestions as the user types.
@@ -14,14 +22,6 @@ Built fully with Jetpack Compose.
 * The search text (user input) is saved with Preferences DataStore.
 * When the user reopens the app, the search text, if any, prepopulates the text field with appropriate results from the database.
 * More frequently visited airports are shown in descending order.
-
-## Screenshots
-<img width="700" alt="flightsearch" src="https://github.com/user-attachments/assets/eb3c89eb-a8ef-4183-b044-4686f3634a98">
-
-## Demo
-| Light mode | Dark mode |
-| ------------- | ------------- |
-| <video src="https://github.com/user-attachments/assets/f4f80d44-332c-4ef9-8d15-59e902633346"> | <video src="https://github.com/user-attachments/assets/11c0bccd-0ac7-4317-8b74-8c1e85c06b9d">| 
 
 ### Material Design theming
 The Gallery App uses [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/) and `MaterialTheme` composable. The app uses a custom, branded color scheme. 
