@@ -14,8 +14,7 @@
 .cxx
 local.properties
 # Ignore Android Studio project files
-.idea/runConfigurations/
-.idea/misc.xml
-.idea/gradle.xml
-.idea/AndroidProjectSystem.xml
+/.idea/gradle.xml
+/.idea/AndroidProjectSystem.xml
 /.idea/runConfigurations.xml
+/.idea/misc.xml
